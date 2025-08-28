@@ -1,6 +1,7 @@
-console.log(" 7°2 actividad numero 9");
+console.log(" 7°2 actividad numero 10");
 
 import express from "express";
+
 import publicacionesRoutes from "./routes/publicaciones.routes.js";
 import usuariosRoutes from "./routes/usuarios.routes.js";
 
@@ -21,3 +22,4 @@ servidor.get("/publicacion", (req, res) => {
 servidor.listen(3000, () => {
   console.log("El servidor express está en el puerto 3000");
 });
+
