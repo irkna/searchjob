@@ -1,28 +1,73 @@
 import { Router } from "express";
+import prisma from "../lib/prisma.js";
+
 const router = Router();
 
-router.get("/productos", (req, res) => {
-  res.json({ mensaje: "Esta es la ruta [get] de mi entidad [publicaciones]" });
+router.get("/productos", async (req, res) => {
+  try {
+    const productos = await prisma.productos.findMany();
+    res.json(productos);
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error al traer los productos" });
+  }
 });
 
-router.get("/productos/:id", (req, res) => {
-  const id = req.params.id;
-  res.json({ mensaje: `Esta es la ruta GET de mi entidad [publicaciones] con el ID ${id}` });
+router.get("/productos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const producto = await prisma.productos.findUnique({
+      where: { id: id },
+    });
+    res.json(producto);
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error al traer el producto" });
+  }
 });
 
-router.post("/productos", (req, res) => {
-  res.json({ mensaje: "Esta es la ruta [post] de mi entidad [publicaciones]" });
+router.post("/productos", async (req, res) => {
+  try {
+    const { nombre, descripcion, img } = req.body;
+    const nuevoProducto = await prisma.productos.create({
+      data: {
+        nombre,
+        descripcion,
+        img,
+      },
+    });
+    res.json(nuevoProducto);
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error al crear el producto" });
+  }
 });
 
-router.put("/productos/:id", (req, res) => {
-  const id = req.params.id;
-  res.json({ mensaje: `Esta es la ruta [put] de mi entidad [publicaciones] con el ID ${id}` });
+router.put("/productos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { nombre, descripcion, img } = req.body;
+    const productoActualizado = await prisma.productos.update({
+      where: { id: id },
+      data: {
+        nombre,
+        descripcion,
+        img,
+      },
+    });
+    res.json(productoActualizado);
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error al actualizar el producto" });
+  }
 });
 
-router.delete("/productos/:id", (req, res) => {
-  const id = req.params.id;
-  res.json({ mensaje: `Esta es la ruta [delete] de mi entidad [publicaciones] con el ID ${id}` });
+router.delete("/productos/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    await prisma.productos.delete({
+      where: { id: id },
+    });
+    res.json({ mensaje: "Producto eliminado" });
+  } catch (error) {
+    res.status(500).json({ error: "Hubo un error al eliminar el producto" });
+  }
 });
 
 export default router;
-
