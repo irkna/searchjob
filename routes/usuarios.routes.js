@@ -1,7 +1,10 @@
 import { Router } from "express";
 import prisma from "../lib/prisma.js";
+import logger from "../middlewares/logger.js";
 
 const router = Router();
+
+router.use(logger); 
 
 router.get("/usuarios", async (req, res) => {
   try {
@@ -71,5 +74,3 @@ router.delete("/usuarios/:id", async (req, res) => {
 });
 
 export default router;
-
-
