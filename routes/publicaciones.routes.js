@@ -1,7 +1,10 @@
 import { Router } from "express";
 import prisma from "../lib/prisma.js";
+import logger from "../middlewares/logger.js";
 
 const router = Router();
+
+router.use(logger); 
 
 router.get("/productos", async (req, res) => {
   try {
