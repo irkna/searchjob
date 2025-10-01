@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-texto="tituloPagina">Search Job - Inicio sesión</title>
+    <link rel="icon" href="../../imagenes/logo.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* estilos responsive y generales ya presentes */
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: flex-start; }
+            header .logo { width: 100%; text-align: left; margin-top: 10px; gap: 10px; }
+            .card-container { flex-direction: column; gap: 20px; }
+            footer { flex-direction: column; text-align: center; gap: 10px; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eed8c975;
+            text-align: center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(200deg,#4e4a57, #5e5b64);
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .logo img { width: 100px; object-fit: cover; margin-right: 5px; }
+        .btn { padding: 10px 15px; font-size: 14px; background: #eed8c9; border-radius: 5px; }
+
+        .content { text-align: center; margin-top: 15px; }
+        .content h1 span { font-size: 2.5rem; color: #e8b898; text-shadow: 2px 2px #00000093; }
+      main{flex:1;}
+        .card-container { display: flex; justify-content: center; gap: 120px; margin-top: 40px; flex-wrap: wrap; }
+        .card { position: relative; width: 120px; height: 100px; overflow: hidden; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+        .card:hover { transform: scale(1.05); }
+        .card img { width: 70%; object-fit: cover; margin-top:10px;}
+        .card-title { position: absolute; bottom: 0; width: 100%; background-color: #000000; color: rgb(0, 0, 0); text-align: center; font-size: 18px; }
+
+        footer { background-color: #222; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .mainfooter { font-size: 16px; }
+        .social-icons a { color: white; margin: 0 10px; font-size: 20px; text-decoration: none; transition: color 0.3s ease; }
+        .social-icons a:hover { color: #1da1f2; }
+        footer span { color: #fff; font-size: 15px; text-shadow:2px 2px #68646457; }
+
+        /* menu */
+        #btn-menu{ display:none; cursor:pointer; }
+        ul {  text-align: left; padding:5px; margin:0; background: rgba(131,129,140,0.2); list-style:none; backdrop-filter: blur(4px) saturate(180%); }
+        .container-menu { position:fixed; width:100%; top:0; left:0; transition: all 900ms ease; visibility:hidden; }
+        #btn-menu:checked ~ .container-menu{ opacity:1; visibility:visible; }
+        .cont-menu { width:100%; max-width:250px; background: rgba(15,12,12,0.777); height:100vh; position:relative; transition: all 500ms ease; transform: translateX(-100%); }
+        #btn-menu:checked ~ .container-menu .cont-menu{ transform: translateX(0%); }
+        .cont-menu nav { transform: translateY(5%); }
+        .cont-menu nav a { display:block; text-decoration:none; padding:20px; text-align:center; color:#c7c7c7; transition: all 400ms ease; }
+        .cont-menu nav a:hover { border-left:2px solid #c7c7c7; }
+        .cont-menu label { position:absolute; right:5px; top:10px; color:#fff; cursor:pointer; font-size:18px; }
+    
+    
+  .mingo {
+
+  width: 200px;   /* Ajusta el tamaño */
+  height: auto;   /* Mantiene proporción */
+  display: block;
+  margin: 0 auto; /* Centrar */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="../../index.html"><img src="../../imagenes/logo.png" alt="Search Job Logo"></a>
+        </div>
+        <nav></nav>
+    </header>
+
+    <!--boton de barra-->
+    <ul><font size="5px"><label for="btn-menu">☰</label></font></ul>
+
+    <!--menu-->
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav><br>
+                <a href="../../index.html" data-texto="home">Home</a>
+                <a href="../vistas/premium.html" data-texto="premium">Premium</a>
+                <a href="../vistas/categorias.html" data-texto="categorias">Categorías</a>
+                <a href="../vistas/notificaciones.html" data-texto="bandeja">Bandeja de entrada</a>
+                <a href="../vistas/adminpedidos.html" data-texto="pedidos">Administrador de pedidos</a>
+                <a href="../vistas/configuracion.html" data-texto="configuracion">Configuracion</a>
+                <a href="../vistas/ayuda.html" data-texto="ayuda">Ayuda</a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <main class="search-section">
+        <br>
+         <div>
+  <img src="../../imagenes/mingo.png" alt="mingo" class="mingo">
+</div>
+        <div class="content">
+
+            <span data-texto="bienvenido">Bienvenido a </span>
+            <h1><span>Search Job</span></h1>
+            <p data-texto="seleccionCuenta">Selecciona el tipo de cuenta para iniciar sesión:</p>
+            <div class="card-container">
+                <a href="../usuarios/formulario/iniciosesion/login-cliente.php" class="card">
+                    <img src="../../imagenes/perfiles/cliente-logo.jpg" alt="Cliente">
+                    <div class="card-title" data-texto="cliente">Cliente</div>
+                </a>
+                <a href="../trabajador/formulario/iniciosesion/login-trabajador.html" class="card">
+                    <img src="../../imagenes/perfiles/trabajador-logo.jpg" alt="Trabajador">
+                    <div class="card-title" data-texto="trabajador">Trabajador</div>
+                </a>
+                
+            </div>
+            <br><br>
+        </div>
+    </main>
+
+    <footer>
+        <span>Search Job</span>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/searchjobofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://x.com/SearchJob_offic" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // tema oscuro/claro
+        function aplicarTemaGlobal() {
+            const tema = localStorage.getItem('tema') || 'claro';
+            const body = document.body;
+            const tarjetas = document.querySelectorAll('.card, .card-title');
+            const contenedores = document.querySelectorAll('.content');
+
+            if (tema === 'oscuro') {
+                body.style.backgroundColor = '#2e2e2e';
+                body.style.color = '#f1f1f1';
+                tarjetas.forEach(card => { card.style.backgroundColor = '#3b3b3b'; card.style.color = '#f1f1f1'; });
+                contenedores.forEach(cont => { cont.style.color = '#f1f1f1'; });
+                document.querySelectorAll('h1, h2, h3').forEach(t => t.style.color = '#ffd27f');
+            } else {
+                body.style.backgroundColor = '#fff';
+                body.style.color = '#333';
+                tarjetas.forEach(card => { card.style.backgroundColor = '#fff'; card.style.color = '#333'; });
+                contenedores.forEach(cont => { cont.style.color = '#333'; });
+                document.querySelectorAll('h1, h2, h3').forEach(t => t.style.color = '#4e4a57');
+            }
+        }
+
+        // traducción de textos
+        window.addEventListener('DOMContentLoaded', () => {
+            aplicarTemaGlobal();
+            const idioma = localStorage.getItem('idioma') || 'es';
+            const textos = document.querySelectorAll('[data-texto]');
+            const traducciones = {
+                es: { tituloPagina:"Search Job - Inicio sesión", home:"Home", premium:"Premium", categorias:"Categorías", bandeja:"Bandeja de entrada", pedidos:"Administrador de pedidos",configuracion:"configuracion", ayuda:"Ayuda", bienvenido:"Bienvenido a", seleccionCuenta:"Selecciona el tipo de cuenta para iniciar sesión:", cliente:"Cliente", trabajador:"Trabajador" },
+                en: { tituloPagina:"Search Job - Login", home:"Home", premium:"Premium", categorias:"Categories", bandeja:"Inbox", pedidos:"Orders Admin",configuracion:"Settings", ayuda:"Help", bienvenido:"Welcome to", seleccionCuenta:"Select account type to login:", cliente:"Client", trabajador:"Worker" },
+                pt: { tituloPagina:"Search Job - Entrar", home:"Início", premium:"Premium", categorias:"Categorias", bandeja:"Caixa de entrada", pedidos:"Administrador de pedidos", configuracion: "Configurações", ayuda:"Ajuda", bienvenido:"Bem-vindo a", seleccionCuenta:"Selecione o tipo de conta para entrar:", cliente:"Cliente", trabajador:"Trabalhador" }
+            };
+            textos.forEach(el => { const clave = el.getAttribute('data-texto'); if(traducciones[idioma][clave]) el.textContent = traducciones[idioma][clave]; });
+        });
+    </script>
+</body>
+</html>

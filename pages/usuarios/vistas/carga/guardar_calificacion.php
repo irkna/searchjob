@@ -1,0 +1,55 @@
+<?php
+include("../../../conexion.php");
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dni_trabajador = $_POST['dni_trabajador'];
+    $dni_usuario = $_POST['dni_usuario'];
+    $puntuacion = $_POST['puntuacion'];
+    $comentario = $_POST['comentario'];
+
+    // Validar si ya calificó
+    $check_sql = "SELECT * FROM califica WHERE dni_trabajador = ? AND dni_usuario = ?";
+    $check_stmt = $conex->prepare($check_sql);
+    $check_stmt->bind_param("ss", $dni_trabajador, $dni_usuario);
+    $check_stmt->execute();
+    $result_check = $check_stmt->get_result();
+
+    if ($result_check->num_rows > 0) {
+        echo "<script>alert('Ya calificaste a este trabajador.');history.back();</script>";
+        exit();
+    }
+
+    // Insertar calificación
+    $sql = "INSERT INTO califica (dni_trabajador, dni_usuario, puntuacion, comentario) 
+            VALUES (?, ?, ?, ?)";
+    $stmt = $conex->prepare($sql);
+    if (!$stmt) {
+        die("Error en prepare(): " . $conex->error);
+    }
+
+    $stmt->bind_param("iiis", $dni_trabajador, $dni_usuario, $puntuacion, $comentario);
+
+    if ($stmt->execute()) {
+        header("Location: ../ver_perfil.php?dni=$dni_trabajador");
+        exit();
+    } else {
+        echo "Error al guardar la calificación.";
+    }
+}
+
+
+/**//*notificacion */
+
+$dni_destinatario = $_POST['dni_trabajador']; // recibe la notificación
+$nombre_autor = $_SESSION['nombre'];
+
+$mensaje = "⭐ $nombre_autor te dejó una calificación.";
+$enlace = "/searchjob/pages/perfil/perfil.php?dni=" . $_SESSION['dni'];
+
+$sql_notif = "INSERT INTO notificaciones (dni_usuario, tipo, mensaje, enlace) VALUES (?, 'calificacion', ?, ?)";
+$stmt_notif = $conex->prepare($sql_notif);
+$stmt_notif->bind_param("iss", $dni_destinatario, $mensaje, $enlace);
+$stmt_notif->execute();
+
+?>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad - Search Job</title>
+   <link rel="icon" href="../../../../imagenes/logo.png" type="image/x-icon">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+     @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+header .logo{
+     justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+    text-align: left;
+}
+  header  {
+    
+   justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+    text-align: right;
+    
+  }
+
+  .search-form {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .search-form input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search-form button {
+    width: 50%;
+  }
+
+  .botones-grid {
+    flex-direction: column;
+   
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
+}        body {
+            font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eed8c975;
+    text-align: center;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+        }
+html,body{
+    height: 100%;
+    margin: 0%;
+}
+main{
+  flex: 1;
+}
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(200deg, #4e4a57, #5e5b64);/*color de barra*/
+      color: white;
+      padding:   6px 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-left: 1%;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 100px;
+      object-fit: cover;
+      margin-right: 5px;
+    }
+
+ 
+
+      h2{
+        margin-top:2px ;
+      color:  #000000ad;
+     }
+      .card img {
+            width: 20%;
+           
+        }
+    #mainContent {
+      
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin-top: 20px;
+      margin-block-end: 30px;
+    }
+form label {
+      display: block;
+    
+     
+    } 
+    
+  form .estilo{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.estilo input{
+    width: 100%;
+    padding: 0 5px;
+    height: 25px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.estilo label{
+    position: absolute;
+    top: 30%;
+    left: 5px;
+    color: #000000c4;/*color de los datos que pide*/
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+.estilo input:focus ~ label,
+.estilo input:valid ~ label{
+    top: -5px;
+    color: #7f7d7d;
+    transition: top 0.3s ease, color 0.3s ease;
+}
+
+.estilo input:focus ~ span::before,
+.estilo input:focus ~ span::before{
+    width: 100%;
+}
+
+
+    form button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #dec2b2;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    form button:hover {
+      background-color: #727077;
+    }
+          /*footer*/
+        footer {
+      background-color: #222;
+      color: white;
+      padding: 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .forgot-password{
+  display: inline-block;
+margin-top: 1rem;
+color: #121111;
+   padding: 5px ;
+   text-decoration: none;
+   font-size: 15px;
+}
+  
+
+    .mainfooter {
+      font-size: 16px;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #1da1f2; /* azul twitter por defecto */
+    }
+
+      footer span {
+   color: #ffffff;
+   
+    font-size: 15px;
+    text-shadow:2px 2px #68646457;/*color del sombreado del titulo*/
+      
+    }
+    /*--posicion del menu	---------------*/
+	#btn-menu{
+		display: none;
+        cursor: pointer;    
+      
+	}
+ ul {
+  text-align: left;
+    padding: 5px;
+    margin: 0px;
+
+    background: rgba(131, 129, 140, 0.2);
+    list-style-type: none;
+    backdrop-filter: blur(4px) saturate(180%);
+    
+}
+
+  
+	   
+    /*--transicion y tamaño	---------------*/
+	.container-menu{
+		position:fixed;
+	
+		width: 100%;
+
+		top: 0;left: 0;
+		transition: all 900ms ease;
+		
+		visibility: hidden;
+	}
+	#btn-menu:checked ~ .container-menu{
+		opacity: 1;
+		visibility: visible;
+	}
+	.cont-menu{
+	
+		width: 100%;
+		max-width: 250px;
+        background: rgba(15, 12, 12, 0.777);/*color del menu*/
+        
+        
+		height: 100vh;
+		position: relative;
+		transition: all 500ms ease;
+		transform: translateX(-100%);
+	}
+	#btn-menu:checked ~ .container-menu .cont-menu{
+		transform: translateX(0%);
+	}
+	.cont-menu nav{
+		transform: translateY(5%);
+    /*margin-top: 115px;que el menu este abajo del header*/
+	}
+	.cont-menu nav a{
+		display: block;
+		text-decoration: none;
+		padding: 20px;
+    text-align: center;
+		color: #c7c7c7 !important;/*color de letras*/
+		
+		transition: all 400ms ease;
+	}
+    /*--la efecto subrayado	---------------*/
+	.cont-menu nav a:hover{
+		border-left: 2px solid #c7c7c7;
+		
+	}
+    /*--la x	---------------*/
+	.cont-menu label{
+		position: absolute;
+		right: 5px;
+		top: 10px;
+		color: #fff;
+		cursor: pointer;
+		font-size: 18px;
+	}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      
+       <a href="../../../../index.html">
+                <img src="../../../../imagenes/logo.png" alt="Search  Logo">
+            </a>
+    
+    </div>
+  </header>
+
+  
+<!--boton de barra	--------------->
+ <ul>
+    <font size="5px"><label for="btn-menu">☰</label></font>                    
+   
+ </ul>
+ 
+ <!--menu	--------------->
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+  
+	<div class="cont-menu">
+   
+         <nav><br>
+           <a href="../../../../index.html" data-texto="home" >Home</a>
+      <a href="../../../../pages/vistas/premium.html" data-texto="premium">Premium</a>
+      <a href="../../../../pages/vistas/categorias.php"data-texto="categorias" >Categorías</a>
+      <a href="../../../../pages/vistas/notificaciones.html"data-texto="bandeja" >Bandeja de entrada</a>
+      <a href="../../../../pages/vistas/adminpedidos.html" data-texto="adminPedidos" >Administrador de pedidos</a>
+      <a href="../../../../pages/vistas/configuracion.html" data-texto="configuracion" >Configuracion</a>
+      <a href="../../../../pages/vistas/ayuda.html" data-texto="ayuda">Ayuda</a>   </nav>
+		<label for="btn-menu">✖️</label>
+	</div>
+</div>
+<main>
+  <!-- Formulario de registro -->
+   <br><br>
+  <div id="mainContent">
+ <h2><center>Iniciar sesión</center></h2>
+    <div class="card">
+      <center><img src="../../../../imagenes/perfiles/trabajador-logo.jpg" alt="trabajador"></center>
+      </div>
+     <form action="validacion-t.php" method="POST">
+        <form method="post">
+        <div class="estilo">
+           <input type="email" id="gmail" name="gmail" required>
+           <label > Gmail:</label>
+        </div>
+        <div class="estilo">
+           <input type="password" id="contrasena" name="contrasena" required>
+           <label >Contraseña:</label>
+        </div>
+          <a href="../../../registro/Recuperacion-contra.html" class="forgot-password"><u>¿Has olvidado tu contraseña?</u></a>
+      <br>
+    <button type="submit">Iniciar sesion</button>
+    </form>
+  </div>
+</form>
+</main>
+ 
+  <footer>
+    <span>Search Job</span>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/searchjobofficial?utm_source=ig_web_button_share_sheet&igsh=MXd5dmtoczJzM2FwNA==" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href=" https://x.com/SearchJob_offic?t=5V35SM4pON8GfgydSvikyg&s=08" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+
+  <script>
+function aplicarConfiguracionGlobal() {
+    // -------------------------------
+    // 1️⃣ Tema oscuro / claro
+    // -------------------------------
+    const tema = localStorage.getItem('tema') || 'claro';
+    const body = document.body;
+
+    if (tema === 'oscuro') {
+        body.style.backgroundColor = '#000';
+        body.style.color = '#fff';
+        document.querySelectorAll('#mainContent').forEach(el => {
+            el.style.backgroundColor = '#1a1a1a';
+            el.style.color = '#fff';
+        });
+        document.querySelectorAll('input, button, label, a').forEach(el => {
+            el.style.color = '#fff';
+            el.style.backgroundColor = (el.tagName === 'BUTTON') ? '#444' : 'transparent';
+        });
+    } else {
+        body.style.backgroundColor = '#fff';
+        body.style.color = '#333';
+        document.querySelectorAll('#mainContent').forEach(el => {
+            el.style.backgroundColor = '#fff';
+            el.style.color = '#000';
+        });
+        document.querySelectorAll('input, button, label, a').forEach(el => {
+            el.style.color = '#000';
+            el.style.backgroundColor = (el.tagName === 'BUTTON') ? '#dec2b2' : 'transparent';
+        });
+    }
+
+    // -------------------------------
+    // 2️⃣ Idioma
+    // -------------------------------
+    const idioma = localStorage.getItem('idioma') || 'es';
+    const textos = {
+        es: {
+            titulo: "Iniciar sesión",
+            gmail: "Gmail:",
+            contrasena: "Contraseña:",
+            boton: "Iniciar sesión",
+            olvido: "¿Has olvidado tu contraseña?",
+            home: "Inicio",
+            premium: "Premium",
+            categorias: "Categorías",
+            bandeja: "Bandeja de entrada",
+            pedidos: "Administrador de pedidos",
+            configuracion: "Configuración",
+            ayuda: "Ayuda"
+        },
+        en: {
+            titulo: "Login",
+            gmail: "Email:",
+            contrasena: "Password:",
+            boton: "Sign In",
+            olvido: "Forgot your password?",
+            home: "Home",
+            premium: "Premium",
+            categorias: "Categories",
+            bandeja: "Inbox",
+            pedidos: "Order Manager",
+            configuracion: "Settings",
+            ayuda: "Help"
+        },
+        pt: {
+            titulo: "Entrar",
+            gmail: "Email:",
+            contrasena: "Senha:",
+            boton: "Entrar",
+            olvido: "Esqueceu sua senha?",
+            home: "Início",
+            premium: "Premium",
+            categorias: "Categorias",
+            bandeja: "Caixa de entrada",
+            pedidos: "Gerenciador de pedidos",
+            configuracion: "Configurações",
+            ayuda: "Ajuda"
+        }
+    };
+    const t = textos[idioma];
+
+    // Cambiar título
+    const h2 = document.querySelector('#mainContent h2');
+    if (h2) h2.textContent = t.titulo;
+
+    // Cambiar labels
+    document.querySelectorAll('#mainContent label').forEach(label => {
+        if (label.innerText.includes("Gmail") || label.innerText.includes("Email")) label.textContent = t.gmail;
+        if (label.innerText.includes("Contraseña") || label.innerText.includes("Password") || label.innerText.includes("Senha")) label.textContent = t.contrasena;
+    });
+
+    // Cambiar botón
+    const btn = document.querySelector('#mainContent button[type="submit"]');
+    if (btn) btn.textContent = t.boton;
+
+    // Cambiar link "olvidaste tu contraseña"
+    const link = document.querySelector('.forgot-password');
+    if (link) link.textContent = t.olvido;
+
+    // Cambiar menú lateral
+    document.querySelectorAll('.cont-menu nav a').forEach(a => {
+        const clave = a.getAttribute("data-texto");
+        if (t[clave]) a.textContent = t[clave];
+    });
+}
+
+// Ejecutar al cargar la página
+window.addEventListener("load", aplicarConfiguracionGlobal);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title data-texto="tituloPagina">Search Job - Encuentra Profesionales</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="icon" href="imagenes/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  .mingo {
+  width: 250px;  
+  height: auto;   
+  display: block;
+  margin: 0 auto; 
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="imagenes/logo.png" alt="Search Job Logo">
+    </div>
+    <nav>
+      <a href="pages/registro/iniciosesion.html" class="btn" data-texto="iniciaSesion">Inicia sesión</a>
+      <a href="pages/usuarios/formulario/registro/unete.php" class="btn" data-texto="unete">Únete</a>
+    </nav>
+  </header>
+
+  <!--boton de barra-->
+  <ul>
+    <font size="5px"><label for="btn-menu">☰</label></font>
+  </ul>
+
+  <!--menu-->
+  <input type="checkbox" id="btn-menu">
+  <div class="container-menu">
+    <div class="cont-menu">
+      <nav><br>
+        <a href="index.html" data-texto="home">Home</a>
+        <a href="pages/vistas/premium.html" data-texto="premium">Premium</a>
+        <a href="pages/vistas/categorias.php" data-texto="categorias">Categorías</a>
+        <a href="pages/vistas/notificaciones.html" data-texto="bandeja">Bandeja de entrada</a>
+        <a href="pages/vistas/adminpedidos.html" data-texto="pedidos">Administrador de pedidos</a>
+        <a href="pages/vistas/configuracion.html" data-texto="configuracion">Configuración</a>
+        <a href="pages/vistas/ayuda.html" data-texto="ayuda">Ayuda</a>
+      </nav>
+      <label for="btn-menu">✖️</label>
+    </div>
+  </div>
+
+  <main class="search-section">
+    <section class="fondo">
+    <div>
+  <img src="imagenes/mingo.png" alt="mingo" class="mingo">
+</div>
+
+   
+      <h2 data-texto="tituloPrincipal">Encuentra un profesional <br><b><span class="Arial Black">ADECUADO</span></b></h2>
+      <br>
+      <!-- tu formulario de búsqueda -->
+<form class="search-form" id="busquedaForm">
+  <input type="text" name="query" data-texto-placeholder="busquedaPlaceholder" placeholder="¿Qué estás buscando? P. ej. Gasista" required>
+  <button type="submit"><i class="fas fa-search"></i></button>
+</form>
+
+<!-- categorías -->
+<section class="botones-categorias">
+  <div class="botones-grid" style="margin-top: 30px;">
+    <a href="resultados.html?query=Gasista" class="filtro-btn" data-texto="gasista"><i class="fas fa-fire-extinguisher"></i> Gasista</a>
+    <a href="resultados.html?query=Electricista" class="filtro-btn" data-texto="electricista"><i class="fas fa-bolt"></i> Electricista</a>
+    <a href="resultados.html?query=Plomero" class="filtro-btn" data-texto="plomero"><i class="fas fa-wrench"></i> Plomero</a>
+    <a href="resultados.html?query=Pintor" class="filtro-btn" data-texto="pintor"><i class="fas fa-paint-roller"></i> Pintor</a>
+    <a href="resultados.html?query=Cerrajero" class="filtro-btn" data-texto="cerrajero"><i class="fas fa-key"></i> Cerrajero</a>
+    <a href="resultados.html?query=Carpintero" class="filtro-btn" data-texto="carpintero"><i class="fas fa-hammer"></i> Carpintero</a>
+    <a href="resultados.html?query=Mecánico" class="filtro-btn" data-texto="mecanico"><i class="fas fa-car"></i> Mecánico</a>
+    <a href="resultados.html?query=Jardinero" class="filtro-btn" data-texto="jardinero"><i class="fas fa-leaf"></i> Jardinero</a>
+  </div>
+</section>
+</section>
+
+  </main>
+
+  <footer>
+    <span>Search Job</span>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/searchjobofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://x.com/SearchJob_offic" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const tema = localStorage.getItem('tema') || 'claro';
+      const idioma = localStorage.getItem('idioma') || 'es';
+
+      // Tema oscuro/claro
+      const body = document.body;
+      const fondos = document.querySelectorAll('.search-section, .fondo, .botones-categorias');
+      const botones = document.querySelectorAll('.btn, .boton-premium, .filtro-btn');
+      const titulos = document.querySelectorAll('h1, h2, h3');
+
+      if(tema==='oscuro'){
+        body.style.backgroundColor = '#2e2e2e';
+        body.style.color = '#f1f1f1';
+        fondos.forEach(e => { e.style.backgroundColor = '#3b3b3b'; e.style.color = '#f1f1f1'; });
+        titulos.forEach(t => t.style.color = '#ffd27f');
+        botones.forEach(b => { b.style.backgroundColor = '#444'; b.style.color = '#fff'; });
+     
+      } else {
+        body.style.backgroundColor = '#fff';
+        body.style.color = '#333';
+        fondos.forEach(e => { e.style.backgroundColor ='#fff'; e.style.color = '#333'; });
+        titulos.forEach(t => t.style.color = '#4e4a57'); 
+        botones.forEach(b => { b.style.backgroundColor = '#eed8c9'; b.style.color = '#333'; });
+      }
+
+      // Traducción
+      const textos = document.querySelectorAll('[data-texto]');
+      const traducciones = {
+        es: {
+          tituloPagina: "Search Job - Encuentra Profesionales",
+          home: "Home",
+          premium: "Premium",
+          categorias: "Categorías",
+          bandeja: "Bandeja de entrada",
+          pedidos: "Administrador de pedidos",
+          configuracion: "Configuración",
+          ayuda: "Ayuda",
+          tituloPrincipal: "Encuentra un profesional ADECUADO",
+          iniciaSesion: "Inicia sesión",
+          unete: "Únete",
+          gasista: "Gasista",
+          electricista: "Electricista",
+          plomero: "Plomero",
+          pintor: "Pintor",
+          cerrajero: "Cerrajero",
+          carpintero: "Carpintero",
+          mecanico: "Mecánico",
+          jardinero: "Jardinero"
+        },
+        en: {
+          tituloPagina: "Search Job - Find Professionals",
+          home: "Home",
+          premium: "Premium",
+          categorias: "Categories",
+          bandeja: "Inbox",
+          pedidos: "Orders Admin",
+          configuracion: "Settings",
+          ayuda: "Help",
+          tituloPrincipal: "Find the RIGHT Professional",
+          iniciaSesion: "Sign In",
+          unete: "Join",
+          gasista: "Gas Technician",
+          electricista: "Electrician",
+          plomero: "Plumber",
+          pintor: "Painter",
+          cerrajero: "Locksmith",
+          carpintero: "Carpenter",
+          mecanico: "Mechanic",
+          jardinero: "Gardener"
+        },
+        pt: {
+          tituloPagina: "Search Job - Encontre Profissionais",
+          home: "Início",
+          premium: "Premium",
+          categorias: "Categorias",
+          bandeja: "Caixa de entrada",
+          pedidos: "Administrador de pedidos",
+          configuracion: "Configurações",
+          ayuda: "Ajuda",
+          tituloPrincipal: "Encontre o Profissional ADEQUADO",
+          iniciaSesion: "Entrar",
+          unete: "Junte-se",
+          gasista: "Gás Técnico",
+          electricista: "Eletricista",
+          plomero: "Encanador",
+          pintor: "Pintor",
+          cerrajero: "Chaveiro",
+          carpintero: "Carpinteiro",
+          mecanico: "Mecânico",
+          jardinero: "Jardineiro"
+        }
+      };
+
+      textos.forEach(el => {
+        const clave = el.getAttribute('data-texto');
+        if(traducciones[idioma][clave]) el.textContent = traducciones[idioma][clave];
+      });
+    });
+  </script>
+  
+<script>
+// Esperar que cargue el DOM
+document.addEventListener("DOMContentLoaded", () => {
+  // Interceptar envío de búsqueda
+  const form = document.getElementById("busquedaForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // evita que se envíe
+    alert("Debe iniciar sesión o ir a categorías para ver los trabajadores disponibles");
+  });
+
+  // Interceptar clics en filtros/categorías
+  const filtros = document.querySelectorAll(".filtro-btn");
+  filtros.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault(); // evita redirección
+      alert("Debe iniciar sesión o ir a categorías para ver los trabajadores disponibles");
+    });
+  });
+});
+</script>
+</body>
+</html>
+
+

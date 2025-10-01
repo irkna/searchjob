@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador de pedidos - Search Job</title>
+  <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="icon" href="../../imagenes/logo.png" type="image/x-icon">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+     <a href="../../index.html">
+                <img src="../../imagenes/logo.png" alt="Search Job Logo">
+            </a>
+    </div>
+     <nav>
+  <a href="../registro/iniciosesion.html" class="btn" data-texto="iniciaSesion">Inicia sesión</a>
+  <a href="../usuarios/unete.php" class="btn" data-texto="unete">Únete</a>
+</nav>
+  </header>
+<!--boton de barra	--------------->
+ <ul>
+    <font size="5px"><label for="btn-menu">☰</label></font>                    
+   
+ </ul>
+  <!--menu	--------------->
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+  
+	<div class="cont-menu">
+        <nav><br> 
+       <a href="../../index.html" data-texto="home">Home</a>
+        <a href="premium.html" data-texto="premium">Premium</a>
+        <a href="categorias.php" data-texto="categorias">Categorías</a>
+        <a href="notificaciones.html" data-texto="bandeja">Bandeja de entrada</a>
+        <a href="adminpedidos.html" data-texto="adminPedidos">Administrador de pedidos</a>
+        <a href="configuracion.html" data-texto="configuracion">Configuración</a>
+        <a href="ayuda.html" data-texto="ayuda">Ayuda</a>
+        </nav>
+		<label for="btn-menu">✖️</label>
+	</div>
+</div>
+
+
+  <main class="search-section">
+    <section class="fondo">
+      <h2 data-texto="tituloAdmin">Administrador de pedidos</h2>
+      <p data-texto="introAdmin">Gestioná tus pedidos: modificá lugar, horario y costo para cada solicitud.</p>
+
+     <div class="pedido-card" style="background:white; max-width:600px; margin:20px auto; padding:20px; border-radius:10px; margin-bottom: -50%; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
+  <p><strong data-texto="pedido">Pedido #1234</strong></p>
+  <label data-texto="cliente">Cliente: Pedro Gómez</label><br>
+  <label data-texto="servicio">Servicio: Plomero</label><br>
+  <label><p data-texto="lugar">Lugar:</p> <input type="text" value="Calle Falsa 123" style="width:100%;"></label><br>
+  <label><p data-texto="horario">Horario:</p> <input type="time" value="15:00" style="width:100%;"></label><br>
+  <label><p data-texto="costo">Costo:</p> <input type="number" value="5000" style="width:100%;"> ARS</label><br>
+  <button class="btn" data-texto="guardar">Guardar cambios</button>
+</div>
+
+    </section>
+  </main>
+
+ <footer>
+    <span>Search Job</span>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/searchjobofficial?utm_source=ig_web_button_share_sheet&igsh=MXd5dmtoczJzM2FwNA==" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href=" https://x.com/SearchJob_offic?t=5V35SM4pON8GfgydSvikyg&s=08" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+ <script>
+window.addEventListener('DOMContentLoaded', () => {
+  const tema = localStorage.getItem('tema') || 'claro';
+  const idioma = localStorage.getItem('idioma') || 'es';
+
+  // --- Tema ---
+  const body = document.body;
+  const bloques = document.querySelectorAll('.search-section, .fondo, .container, .config-box, .card');
+  const botones = document.querySelectorAll('.btn, .boton-premium, .filtro-btn');
+  const titulos = document.querySelectorAll('h1, h2, h3');
+  const inputs = document.querySelectorAll('input, select, textarea');
+
+  if (tema === 'oscuro') {
+    body.style.backgroundColor = '#2e2e2e';
+    body.style.color = '#f1f1f1';
+    bloques.forEach(el => { el.style.backgroundColor = '#3b3b3b'; el.style.color = '#f1f1f1'; });
+    titulos.forEach(t => t.style.color = '#ffd27f');
+    botones.forEach(b => { b.style.backgroundColor = '#444'; b.style.color = '#fff'; });
+    inputs.forEach(i => { i.style.backgroundColor = '#555'; i.style.color = '#f1f1f1'; i.style.borderColor = '#777'; });
+  } else {
+    body.style.backgroundColor = '#fff';
+    body.style.color = '#333';
+    bloques.forEach(el => { el.style.backgroundColor = '#fff'; el.style.color = '#333'; });
+    titulos.forEach(t => t.style.color = '#4e4a57');
+    botones.forEach(b => { b.style.backgroundColor = '#eed8c9'; b.style.color = '#333'; });
+    inputs.forEach(i => { i.style.backgroundColor = '#fff'; i.style.color = '#333'; i.style.borderColor = '#ccc'; });
+  }
+
+  // --- Idioma ---
+  const textos = document.querySelectorAll('[data-texto]');
+
+    const traducciones = {
+      es: {
+        tituloPagina: "Administrador de pedidos - Search Job",
+        iniciaSesion: "Inicia sesión",
+        unete: "Únete",
+        home: "Home",
+        premium: "Premium",
+        categorias: "Categorías",
+        bandeja: "Bandeja de entrada",
+        adminPedidos: "Administrador de pedidos",
+        configuracion: "Configuración",
+        ayuda: "Ayuda",
+        tituloAdmin: "Administrador de pedidos",
+        introAdmin: "Gestioná tus pedidos: modificá lugar, horario y costo para cada solicitud.",
+        pedido: "Pedido #1234",
+        cliente: "Cliente: Pedro Gómez",
+        servicio: "Servicio: Plomería",
+        lugar: "Lugar:",
+        horario: "Horario:",
+        costo: "Costo:",
+        guardar: "Guardar cambios"
+      },
+      en: {
+        tituloPagina: "Order Manager - Search Job",
+        iniciaSesion: "Sign in",
+        unete: "Join",
+        home: "Home",
+        premium: "Premium",
+        categorias: "Categories",
+        bandeja: "Inbox",
+        adminPedidos: "Order Manager",
+        configuracion: "Settings",
+        ayuda: "Help",
+        tituloAdmin: "Order Manager",
+        introAdmin: "Manage your orders: modify location, schedule, and cost for each request.",
+        pedido: "Order #1234",
+        cliente: "Client: Pedro Gómez",
+        servicio: "Service: Plumbing",
+        lugar: "Location:",
+        horario: "Schedule:",
+        costo: "Cost:",
+        guardar: "Save changes"
+      },
+      pt: {
+        tituloPagina: "Administrador de pedidos - Search Job",
+        iniciaSesion: "Entrar",
+        unete: "Junte-se",
+        home: "Home",
+        premium: "Premium",
+        categorias: "Categorias",
+        bandeja: "Caixa de entrada",
+        adminPedidos: "Administrador de pedidos",
+        configuracion: "Configurações",
+        ayuda: "Ajuda",
+        tituloAdmin: "Administrador de pedidos",
+        introAdmin: "Gerencie seus pedidos: modifique local, horário e custo para cada solicitação.",
+        pedido: "Pedido #1234",
+        cliente: "Cliente: Pedro Gómez",
+        servicio: "Serviço: Encanamento",
+        lugar: "Local:",
+        horario: "Horário:",
+        costo: "Custo:",
+        guardar: "Salvar alterações"
+      }
+    };
+
+  textos.forEach(el => {
+    const clave = el.getAttribute('data-texto');
+    if(traducciones[idioma][clave]) el.textContent = traducciones[idioma][clave];
+  });
+});
+  </script>
+
+
+
+</body>
+</html>
+
+
+
+

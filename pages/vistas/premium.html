@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title data-texto="tituloPagina">Hazte Premium - Search Job</title>
+  <link rel="stylesheet" href="../../styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="../../imagenes/logo.png" type="image/x-icon">
+  <style>
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; }
+      header .logo{ justify-content: flex-start; width: 100%; gap: 10px; margin-top: 10px; text-align: left; }
+      .search-form { flex-direction: column; padding: 10px; }
+      .search-form input[type="text"] { width: 100%; margin-bottom: 10px; }
+      .search-form button { width: 50%; }
+      footer { flex-direction: column; text-align: center; gap: 10px; }
+      .social-icons { margin-top: 10px; }
+    }
+
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #eed8c975; text-align: center; color: #333; display: flex; flex-direction: column; }
+    html,body{ height: 100%; margin: 0; }
+    main{ flex: 1; }
+    header { background: linear-gradient(200deg,#4e4a57, #5e5b64); color: white; padding: 15px 10px; }
+    footer{ background: #000000; color: white; padding: 15px 10px; }
+    .container { max-width: 700px; margin: 30px auto; background-color: #e6ded9; color: #333; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: background 0.3s, color 0.3s; }
+    h2 { margin-bottom: 10px; color: #ffffff; }
+    li { margin: 12px 0; padding-left: 25px; position: relative; list-style: none; }
+    li::before { content: "⭐"; position:unset; left: 0; color: #ffcc00; }
+    .boton-premium { margin-top: 25px; padding: 12px 24px; background: #a49592; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; }
+    .boton-premium:hover { background: #8a7d79; }
+
+    /* Menu */
+    #btn-menu{ display: none; cursor: pointer; }
+    ul { text-align: left; padding: 5px; margin: 0; background: rgba(131, 129, 140, 0.2); list-style-type: none; backdrop-filter: blur(4px) saturate(180%); }
+    .container-menu{ position:fixed; width: 100%; top: 0; left: 0; transition: all 900ms ease; visibility: hidden; }
+    #btn-menu:checked ~ .container-menu{ opacity: 1; visibility: visible; }
+    .cont-menu{ width: 100%; max-width: 250px; background: rgba(15, 12, 12, 0.777); height: 100vh; position: relative; transition: all 500ms ease; transform: translateX(-100%); }
+    #btn-menu:checked ~ .container-menu .cont-menu{ transform: translateX(0%); }
+    .cont-menu nav{ transform: translateY(5%); }
+    .cont-menu nav a{ display: block; text-decoration: none; padding: 20px; text-align: center; color: #c7c7c7; transition: all 400ms ease; }
+    .cont-menu nav a:hover{ border-left: 2px solid #c7c7c7; }
+    .cont-menu label{ position: absolute; right: 5px; top: 10px; color: #fff; cursor: pointer; font-size: 18px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="../../index.html"><img src="../../imagenes/logo.png" alt="Search Job Logo"></a>
+  </div>
+  <h2 data-texto="tituloPagina">Hazte Premium🌟</h2>
+</header>
+
+<ul><font size="5px"><label for="btn-menu">☰</label></font></ul>
+<input type="checkbox" id="btn-menu">
+<div class="container-menu">
+  <div class="cont-menu">
+    <nav><br>
+      <a href="../../index.html" data-texto="home">Home</a>
+      <a href="premium.html" data-texto="premium">Premium</a>
+      <a href="categorias.php" data-texto="categorias">Categorías</a>
+      <a href="notificaciones.html" data-texto="bandeja">Bandeja de entrada</a>
+      <a href="adminpedidos.html" data-texto="pedidos">Administrador de pedidos</a>
+      <a href="configuracion.html" data-texto="configuracion">Configuración</a>
+      <a href="ayuda.html" data-texto="ayuda">Ayuda</a>
+    </nav>
+    <label for="btn-menu">✖️</label>
+  </div>
+</div>
+
+<main>
+    <br><br><br><br>
+  <div class="container">
+  
+    <h3 data-texto="beneficiosTitulo">Beneficios Exclusivos para Usuarios Premium</h3>
+    <p data-texto="beneficiosIntro">Al convertirte en miembro premium vas a obtener ventajas que mejoran tu experiencia:</p>
+    <ul>
+      <li data-texto="beneficio1">Prioridad en las búsquedas</li>
+      <li data-texto="beneficio2">Mayor visibilidad en el home</li>
+      <li data-texto="beneficio3">Perfil destacado con ícono dorado</li>
+      <li data-texto="beneficio4">Acceso a estadísticas de tu perfil</li>
+      <li data-texto="beneficio5">Soporte personalizado 24/7</li>
+      <li data-texto="beneficio6">Reseñas verificadas más visibles</li>
+    </ul>
+    <button class="boton-premium" data-texto="botonPremium" onclick="alert('Gracias por tu interés. Pronto activaremos esta función.')">¡Quiero ser Premium!</button>
+  </div>
+</main>
+
+<footer>
+  <span>Search Job</span>
+  <div class="mainfooter"></div>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/searchjobofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://x.com/SearchJob_offic" target="_blank"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  // ===== Tema =====
+  const tema = localStorage.getItem('tema') || 'claro';
+  const body = document.body;
+  const contenedores = document.querySelectorAll('.container');
+  const titulos = document.querySelectorAll('h1, h2, h3');
+  const botones = document.querySelectorAll('.btn, .boton-premium');
+
+  if(tema === 'oscuro'){
+    body.style.backgroundColor = '#2e2e2e';
+    body.style.color = '#f1f1f1';
+    contenedores.forEach(c => { c.style.backgroundColor = '#3b3b3b'; c.style.color = '#f1f1f1'; });
+    titulos.forEach(t => t.style.color = '#ffd27f');
+    botones.forEach(b => { b.style.backgroundColor = '#444'; b.style.color = '#fff'; });
+  } else {
+    body.style.backgroundColor = '#fff';
+    body.style.color = '#333';
+    contenedores.forEach(c => { c.style.backgroundColor = '#fff'; c.style.color = '#333'; });
+    titulos.forEach(t => t.style.color = '#000');
+    botones.forEach(b => { b.style.backgroundColor = '#a49592'; b.style.color = '#fff'; });
+  }
+
+  // ===== Idioma =====
+  const idioma = localStorage.getItem('idioma') || 'es';
+  const textos = document.querySelectorAll('[data-texto]');
+  const traducciones = {
+    es: {
+      tituloPagina: "Hazte Premium - Search Job",
+      home: "Home",
+      premium: "Premium",
+      categorias: "Categorías",
+      bandeja: "Bandeja de entrada",
+      pedidos: "Administrador de pedidos",
+      configuracion: "Configuración",
+      ayuda: "Ayuda",
+      beneficiosTitulo: "Beneficios Exclusivos para Usuarios Premium",
+      beneficiosIntro: "Al convertirte en miembro premium vas a obtener ventajas que mejoran tu experiencia:",
+      beneficio1: "Prioridad en las búsquedas",
+      beneficio2: "Mayor visibilidad en el home",
+      beneficio3: "Perfil destacado con ícono dorado",
+      beneficio4: "Acceso a estadísticas de tu perfil",
+      beneficio5: "Soporte personalizado 24/7",
+      beneficio6: "Reseñas verificadas más visibles",
+      botonPremium: "¡Quiero ser Premium!"
+    },
+    en: {
+      tituloPagina: "Become Premium - Search Job",
+      home: "Home",
+      premium: "Premium",
+      categorias: "Categories",
+      bandeja: "Inbox",
+      pedidos: "Orders Admin",
+      configuracion: "Settings",
+      ayuda: "Help",
+      beneficiosTitulo: "Exclusive Benefits for Premium Users",
+      beneficiosIntro: "As a premium member you'll get advantages that enhance your experience:",
+      beneficio1: "Priority in searches",
+      beneficio2: "More visibility on home",
+      beneficio3: "Highlighted profile with golden icon",
+      beneficio4: "Access to your profile statistics",
+      beneficio5: "Personalized 24/7 support",
+      beneficio6: "More visible verified reviews",
+      botonPremium: "I want to be Premium!"
+    },
+    pt: {
+      tituloPagina: "Torne-se Premium - Search Job",
+      home: "Início",
+      premium: "Premium",
+      categorias: "Categorias",
+      bandeja: "Caixa de entrada",
+      pedidos: "Administrador de pedidos",
+      configuracion: "Configurações",
+      ayuda: "Ajuda",
+      beneficiosTitulo: "Benefícios Exclusivos para Usuários Premium",
+      beneficiosIntro: "Como membro premium você terá vantagens que melhoram sua experiência:",
+      beneficio1: "Prioridade nas buscas",
+      beneficio2: "Mais visibilidade na página inicial",
+      beneficio3: "Perfil destacado com ícone dourado",
+      beneficio4: "Acesso às estatísticas do perfil",
+      beneficio5: "Suporte personalizado 24/7",
+      beneficio6: "Avaliações verificadas mais visíveis",
+      botonPremium: "Quero ser Premium!"
+    }
+  };
+
+  textos.forEach(el => {
+    const clave = el.getAttribute('data-texto');
+    if(traducciones[idioma][clave]) el.textContent = traducciones[idioma][clave];
+  });
+});
+</script>
+
+</body>
+</html>
