@@ -493,13 +493,7 @@ body.modo-oscuro label {
         <input type="number" name="costo" required>
       </div>
 
-      <div class="form-group">
-        <label>Método de pago:</label>
-        <select name="metodo_de_pago" required>
-          <option value="Efectivo">Efectivo</option>
-          <option value="Transferencia">Transferencia</option>
-        </select>
-      </div>
+   
 
       <div class="form-group">
         <label>Descripción:</label>
