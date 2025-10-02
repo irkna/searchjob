@@ -303,7 +303,7 @@ if ($stmtL = $conex->prepare($sqlList)) {
     <input type="number" name="costo" min="1" step="0.01" 
            value="<?php echo htmlspecialchars($c['costo']); ?>" 
            style="width:100%;" required>
-  </label>              <p style="margin:6px 0;"><b>Método de pago:</b> <?php echo htmlspecialchars($c['metodo_de_pago']); ?></p>
+  </label>             
 
               <div style="margin:10px; max-width:2500px;gap:10px; flex-wrap:wrap;">
                 <button class="btn" type="submit" name="accion" value="actualizar" data-texto="guardar" style="background:#eed8c9;color:#333;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Guardar cambios</button>
