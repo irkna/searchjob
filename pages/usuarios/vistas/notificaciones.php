@@ -79,9 +79,7 @@ $notificaciones = $res->fetch_all(MYSQLI_ASSOC);
             <div style="margin-bottom:10px; padding:10px; border-radius:8px; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
               <span><?php echo htmlspecialchars($n['mensaje']); ?></span><br>
               <small><?php echo date("d/m/Y H:i", strtotime($n['fecha'])); ?></small><br>
-              <?php if (!empty($n['enlace'])): ?>
-                <a href="<?php echo htmlspecialchars($n['enlace']); ?>" style="color:#007bff;" data-texto="ver">Ver perfil</a>
-              <?php endif; ?>
+          
             </div>
           <?php endforeach; ?>
         <?php else: ?>
