@@ -141,6 +141,17 @@ else {
             }
         }
     }
+    if ($_POST['accion'] === 'entregado') {
+    $id_servicio = (int)$_POST['id_servicio'];
+    $sql = "UPDATE contrato SET estado='entregado' WHERE id_servicio=$id_servicio";
+    mysqli_query($conex, $sql);
+
+} elseif ($_POST['accion'] === 'finalizar') {
+    $id_servicio = (int)$_POST['id_servicio'];
+    $sql = "UPDATE contrato SET estado='finalizado' WHERE id_servicio=$id_servicio";
+    mysqli_query($conex, $sql);
+}
+
 }
 
 
@@ -154,34 +165,34 @@ $dni = $_SESSION['dni']; // DNI del usuario logueado
 $contratos = [];
 
 // Consulta: trae los contratos donde el usuario es cliente o trabajador
-// Consulta: trae los contratos donde el usuario es cliente o trabajador
-$sqlList = "SELECT 
-              c.id_servicio,
-              c.dni_usuario,
-              c.dni_trabajador,
-              c.costo,
-              c.metodo_de_pago,
-              c.fecha_y_hora,
-              c.descripcion,
-              c.ubicacion,
-              u.dni   AS dni_asociado,
-              u.nombre AS nombre_asociado,
-              u.foto_perfil AS foto_asociado
-            FROM contrato c
-            JOIN usuarios u 
-              ON u.dni = IF(c.dni_usuario=?, c.dni_trabajador, c.dni_usuario)
-            WHERE c.dni_usuario=? OR c.dni_trabajador=?
-            ORDER BY c.fecha_y_hora DESC";
+// Pedidos activos (todos menos finalizado)
+$sqlActivos = "SELECT 
+    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, c.metodo_de_pago,
+    c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
+    u.dni AS dni_asociado, u.nombre AS nombre_asociado, u.foto_perfil AS foto_asociado
+  FROM contrato c
+  JOIN usuarios u ON u.dni = IF(c.dni_usuario=?, c.dni_trabajador, c.dni_usuario)
+  WHERE (c.dni_usuario=? OR c.dni_trabajador=?) AND c.estado <> 'finalizado'
+  ORDER BY c.fecha_y_hora DESC";
+$stmtA = $conex->prepare($sqlActivos);
+$stmtA->bind_param("iii", $dni, $dni, $dni);
+$stmtA->execute();
+$resultActivos = $stmtA->get_result();
 
-if ($stmtL = $conex->prepare($sqlList)) {
-    $stmtL->bind_param("iii", $dni, $dni, $dni);
-    $stmtL->execute();
-    $resL = $stmtL->get_result();
-    while ($r = $resL->fetch_assoc()) {
-        $contratos[] = $r;
-    }
-    $stmtL->close();
-}
+// Trabajos finalizados
+$sqlFinalizados = "SELECT 
+    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, c.metodo_de_pago,
+    c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
+    u.dni AS dni_asociado, u.nombre AS nombre_asociado, u.foto_perfil AS foto_asociado
+  FROM contrato c
+  JOIN usuarios u ON u.dni = IF(c.dni_usuario=?, c.dni_trabajador, c.dni_usuario)
+  WHERE (c.dni_usuario=? OR c.dni_trabajador=?) AND c.estado = 'finalizado'
+  ORDER BY c.fecha_y_hora DESC";
+$stmtF = $conex->prepare($sqlFinalizados);
+$stmtF->bind_param("iii", $dni, $dni, $dni);
+$stmtF->execute();
+$resultFinalizados = $stmtF->get_result();
+
 
 ?>
 <!DOCTYPE html>
@@ -262,59 +273,96 @@ if ($stmtL = $conex->prepare($sqlList)) {
         </div>
       <?php endif; ?>
 
-      <?php if (count($contratos) === 0): ?>
-        <div class="pedido-card" style="background:white; max-width:600px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
-          <p>No tienes pedidos aún.</p>
-        </div>
-      <?php else: ?>
-  <?php foreach ($contratos as $c): ?>
-<div class="pedido-card" style="background:white; max-width:700px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
-  <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-    <a href="ver_perfil.php?dni=<?php echo (int)$c['dni_asociado']; ?>" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
-      <img src="<?php echo $c['foto_asociado'] ? ('../../../imagenes/perfiles/' . htmlspecialchars($c['foto_asociado'])) : '../../../imagenes/perfiles/cliente-logo.jpg'; ?>" 
-           alt="Perfil" 
-           style="width:48px;height:48px;border-radius:50%;object-fit:cover; cursor:pointer;">
-      <div>
-        <p style="margin:0;"><strong>Pedido #<?php echo (int)$c['id_servicio']; ?></strong></p>
-        <p style="margin:0;"><b>Cliente:</b> <?php echo htmlspecialchars($c['nombre_asociado']); ?></p>
-      </div>
-    </a>
+<?php if (mysqli_num_rows($resultActivos) === 0): ?>
+  <div class="pedido-card" style="background:white; max-width:600px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
+    <p>No tienes pedidos activos.</p>
   </div>
-
- 
-            <p><b>Servicio:</b> <?php echo htmlspecialchars($c['descripcion']); ?></p>
-
-            <form method="POST" style="display:grid; gap:10px;">
-              <input type="hidden" name="id_servicio" value="<?php echo (int)$c['id_servicio']; ?>">
-
-              <label>
-                <span>Lugar:</span>
-                <input type="text" name="ubicacion" value="<?php echo htmlspecialchars($c['ubicacion']); ?>" style="width:100%;" required>
-              </label>
-
-              <label>
-                <span>Horario:</span>
-                <input type="datetime-local" name="fecha_y_hora" value="<?php echo htmlspecialchars(date('Y-m-d\TH:i', strtotime($c['fecha_y_hora']))); ?>" style="width:100%;" required>
-              </label>
-
-
-  <label>
-    <span>Costo:</span>
-    <input type="number" name="costo" min="1" step="0.01" 
-           value="<?php echo htmlspecialchars($c['costo']); ?>" 
-           style="width:100%;" required>
-  </label>             
-
-              <div style="margin:10px; max-width:2500px;gap:10px; flex-wrap:wrap;">
-                <button class="btn" type="submit" name="accion" value="actualizar" data-texto="guardar" style="background:#eed8c9;color:#333;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Guardar cambios</button>
-                <button class="btn" type="submit" name="accion" value="cancelar" onclick="return confirm('¿Seguro que querés cancelar este contrato?');" style="background:#d9534f;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Cancelar contrato</button>
-              </div>
-            </form>
+<?php else: ?>
+  <?php while ($c = mysqli_fetch_assoc($resultActivos)) : ?>
+    <div class="pedido-card" style="background:white; max-width:700px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+        <a href="ver_perfil.php?dni=<?php echo (int)$c['dni_asociado']; ?>" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+          <img src="<?php echo $c['foto_asociado'] ? ('../../../imagenes/perfiles/' . htmlspecialchars($c['foto_asociado'])) : '../../../imagenes/perfiles/cliente-logo.jpg'; ?>" 
+               alt="Perfil" 
+               style="width:48px;height:48px;border-radius:50%;object-fit:cover; cursor:pointer;">
+          <div>
+            <p style="margin:0;"><strong>Pedido #<?php echo (int)$c['id_servicio']; ?></strong></p>
+            <p style="margin:0;"><b>Cliente:</b> <?php echo htmlspecialchars($c['nombre_asociado']); ?></p>
           </div>
-        <?php endforeach; ?>
+        </a>
+      </div>
 
+      <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
+      <p><b>Servicio:</b> <?php echo htmlspecialchars($c['descripcion']); ?></p>
 
-      <?php endif; ?>
+      <form method="POST" style="display:grid; gap:10px;">
+        <input type="hidden" name="id_servicio" value="<?php echo (int)$c['id_servicio']; ?>">
+
+        <label>
+          <span>Lugar:</span>
+          <input type="text" name="ubicacion" value="<?php echo htmlspecialchars($c['ubicacion']); ?>" style="width:100%;" required>
+        </label>
+
+        <label>
+          <span>Horario:</span>
+          <input type="datetime-local" name="fecha_y_hora" value="<?php echo htmlspecialchars(date('Y-m-d\TH:i', strtotime($c['fecha_y_hora']))); ?>" style="width:100%;" required>
+        </label>
+
+        <label>
+          <span>Costo:</span>
+          <input type="number" name="costo" min="1" step="0.01" 
+                 value="<?php echo htmlspecialchars($c['costo']); ?>" 
+                 style="width:100%;" required>
+        </label>             
+
+        <div style="margin:10px; max-width:2500px; gap:10px; flex-wrap:wrap;">
+          <button class="btn" type="submit" name="accion" value="actualizar" style="background:#eed8c9;color:#333;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Guardar cambios</button>
+          <button class="btn" type="submit" name="accion" value="cancelar" onclick="return confirm('¿Seguro que querés cancelar este contrato?');" style="background:#d9534f;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Cancelar contrato</button>
+
+          <?php if ($c['estado'] !== 'finalizado'): ?>
+            <button class="btn" type="submit" name="accion" value="entregado"
+                    onclick="return confirm('¿Confirmás que terminaste el trabajo?');"
+                    style="background:#5cb85c;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">
+              Finalizar contrato
+            </button>
+          <?php endif; ?>
+        </div>
+      </form><br>
+    </div><br><br>
+  <?php endwhile; ?>
+<?php endif; ?>
+
+<hr>
+
+<h2>Trabajos finalizados</h2>
+<?php if (mysqli_num_rows($resultFinalizados) === 0): ?>
+  <div class="pedido-card" style="background:white; max-width:600px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
+    <p>No tienes trabajos finalizados.</p>
+  </div>
+<?php else: ?>
+  <?php while ($c = mysqli_fetch_assoc($resultFinalizados)) : ?>
+    <div class="pedido-card" style="background:white; max-width:700px; margin:20px auto; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); color:#333;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+        <a href="ver_perfil.php?dni=<?php echo (int)$c['dni_asociado']; ?>" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+          <img src="<?php echo $c['foto_asociado'] ? ('../../../imagenes/perfiles/' . htmlspecialchars($c['foto_asociado'])) : '../../../imagenes/perfiles/cliente-logo.jpg'; ?>" 
+               alt="Perfil" 
+               style="width:48px;height:48px;border-radius:50%;object-fit:cover; cursor:pointer;">
+          <div>
+            <p style="margin:0;"><strong>Pedido #<?php echo (int)$c['id_servicio']; ?></strong></p>
+            <p style="margin:0;"><b>Cliente:</b> <?php echo htmlspecialchars($c['nombre_asociado']); ?></p>
+          </div>
+        </a>
+      </div>
+
+      <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
+      <p><b>Servicio:</b> <?php echo htmlspecialchars($c['descripcion']); ?></p>
+      <p><b>Lugar:</b> <?php echo htmlspecialchars($c['ubicacion']); ?></p>
+      <p><b>Fecha y hora:</b> <?php echo htmlspecialchars($c['fecha_y_hora']); ?></p>
+      <p><b>Costo:</b> <?php echo (int)$c['costo']; ?> ARS</p>
+    </div>
+  <?php endwhile; ?>
+<?php endif; ?>
+
     </section>
   </main>
 
