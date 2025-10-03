@@ -258,7 +258,6 @@ session_start();
     function aplicarConfiguracion() {
       const tema = document.querySelector('input[name="tema"]:checked')?.value;
       const idioma = document.getElementById('idioma-select').value;
-      const estadoOnline = document.getElementById('estado-online').checked;
 
       if (tema) {
         localStorage.setItem('tema', tema);
@@ -266,7 +265,6 @@ session_start();
       }
 
       localStorage.setItem('idioma', idioma);
-      localStorage.setItem('estadoOnline', estadoOnline ? "visible" : "oculto");
 
       alert("Configuración aplicada correctamente.");
       aplicarTraducciones(idioma);
@@ -295,7 +293,6 @@ session_start();
     window.onload = function() {
       const tema = localStorage.getItem("tema");
       const idioma = localStorage.getItem("idioma") || "es";
-      const estadoOnline = localStorage.getItem("estadoOnline");
 
       if (tema) {
         const radio = document.querySelector(`input[name="tema"][value="${tema}"]`);
@@ -308,9 +305,7 @@ session_start();
         aplicarTraducciones(idioma);
       }
 
-      if (estadoOnline === "visible") {
-        document.getElementById('estado-online').checked = true;
-      }
+   
     };
   </script>
 </body>
