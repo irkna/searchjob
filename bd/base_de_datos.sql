@@ -68,13 +68,14 @@ CREATE TABLE `contrato` (
   `dni_trabajador` INT(8) NOT NULL,
   `dni_usuario` INT(8) NOT NULL,
   `costo` INT(100) NOT NULL,
-  `metodo_de_pago` VARCHAR(50) NOT NULL,
   `fecha_y_hora` DATETIME NOT NULL,
   `descripcion` VARCHAR(100) NOT NULL,
   `ubicacion` VARCHAR(100) NOT NULL,
   FOREIGN KEY (`dni_trabajador`) REFERENCES trabajador(`identificador`),
   FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`)
 );
+ALTER TABLE contrato ADD COLUMN estado ENUM('pendiente','en_curso','entregado','finalizado','cancelado') DEFAULT 'en_curso';
+
 
 CREATE TABLE `mensajes` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
