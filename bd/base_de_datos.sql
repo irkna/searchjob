@@ -62,6 +62,13 @@ CREATE TABLE `califica` (
   FOREIGN KEY (`dni_trabajador`) REFERENCES trabajador(`identificador`),
   FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`)
 );
+ALTER TABLE califica
+DROP FOREIGN KEY califica_ibfk_1;
+
+ALTER TABLE califica
+ADD CONSTRAINT califica_ibfk_1
+FOREIGN KEY (dni_trabajador) REFERENCES usuarios(dni);
+
 
 CREATE TABLE `contrato` (
   `id_servicio` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
