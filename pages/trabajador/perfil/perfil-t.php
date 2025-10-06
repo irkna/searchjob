@@ -288,9 +288,23 @@ input[type="file"] {
       <div class="info-item" id="ocupacion">
         <i class="fas fa-info"></i> Ocupacion: <?= htmlspecialchars($usuario['ocupacion']) ?>
       </div>
- <div class="info-item" id="linkdepago">
-        <i class="fas fa-link"></i> Link de pago: <?= htmlspecialchars($usuario['linkdepago']) ?>
-      </div>
+<div class="info-item" id="linkdepago">
+  <i class="fas fa-link"></i> 
+  Link de pago:
+  <?php if (!empty($usuario['linkdepago'])): ?>
+    <a href="<?= (strpos($usuario['linkdepago'], 'http') === 0 ? $usuario['linkdepago'] : 'https://' . $usuario['linkdepago']) ?>" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       style="color: var(--accent-color); text-decoration: underline;">
+      <?= htmlspecialchars($usuario['linkdepago']) ?>
+    </a>
+  <?php else: ?>
+    <span> Agregue un link de pago </span>
+  <?php endif; ?>
+</div>
+
+
+      
     <button onclick="editarPerfil()">Editar perfil</button>
     <button><a href="cerrarsesion.php" style="color:white">Cerrar sesión</a></button>
   </div>

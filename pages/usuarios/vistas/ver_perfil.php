@@ -451,7 +451,7 @@ body.modo-oscuro label {
 </div>
 
             <h2><?php echo htmlspecialchars($datos['nombre']); ?></h2>
-            <br>
+        
 <div class="info-item">
     <i class="fas fa-phone"></i>
     <strong>Celular:</strong> <?php echo htmlspecialchars($datos['telefono']); ?>
@@ -467,14 +467,27 @@ body.modo-oscuro label {
     <i class="fas fa-info"></i>
     <strong>Ocupación:</strong> <?php echo htmlspecialchars($datos['ocupacion']); ?>
 </div>
-<?php if (!empty($datos['linkdepago'])): ?>
 <div class="info-item">
     <i class="fas fa-link"></i>
-    <strong>Link de pago:</strong> 
-    <?php echo htmlspecialchars($datos['linkdepago']); ?>
-  
+    <strong>Link de pago:</strong>
+    <?php 
+        if (!empty($datos['linkdepago'])) {
+            $link = trim($datos['linkdepago']);
+
+            // Si no empieza con http:// o https://, se lo agregamos
+            if (!preg_match('/^https?:\/\//i', $link)) {
+                $link = 'https://' . $link;
+            }
+
+            echo '<a href="' . htmlspecialchars($link) . '" target="_blank" style="color: #007bff; text-decoration: none;">'
+                . htmlspecialchars($datos['linkdepago']) .
+                '</a>';
+        } else {
+            echo '<span style="color:gray;">no registró un link de pago</span>';
+        }
+    ?>
 </div>
-<?php endif; ?>
+
 
 
 <!-- Botón contratar solo si es trabajador -->
