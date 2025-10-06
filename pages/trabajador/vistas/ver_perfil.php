@@ -54,13 +54,13 @@ $publicaciones = $pub_result->fetch_all(MYSQLI_ASSOC);
 // Cargar calificaciones (siempre, tanto a trabajadores como a clientes)
 // Cargar calificaciones, excluyendo las que hizo el usuario logueado
 $dni_logueado = isset($_SESSION['dni']) ? $_SESSION['dni'] : '';
+// Mostrar solo las calificaciones que recibió el usuario (no las que hizo)
 $sql_cal = "SELECT u.dni AS dni_usuario, u.nombre, c.puntuacion, c.comentario 
             FROM califica c
             INNER JOIN usuarios u ON c.dni_usuario = u.dni
-            WHERE (c.dni_trabajador = ? OR c.dni_usuario = ?) 
-               AND c.dni_usuario != ?";
+            WHERE c.dni_trabajador = ?";
 $stmt_cal = $conex->prepare($sql_cal);
-$stmt_cal->bind_param("sss", $dni, $dni, $dni_logueado);
+$stmt_cal->bind_param("s", $dni);
 $stmt_cal->execute();
 $res_cal = $stmt_cal->get_result();
 $calificaciones = $res_cal->fetch_all(MYSQLI_ASSOC);

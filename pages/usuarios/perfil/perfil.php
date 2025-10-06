@@ -43,22 +43,37 @@ $_SESSION['foto_perfil'] = $usuario['foto_perfil'];
 ///////////////////////////////////////////////////////////
 // Subida de imagen de publicación
 if (isset($_POST['publicar'])) {
-    $descripcion = $_POST['descripcion'];
 
-    if (isset($_FILES['foto_publicacion']) && $_FILES['foto_publicacion']['error'] == 0) {
-        $nombreArchivo = 'pub_' . time() . '_' . basename($_FILES['foto_publicacion']['name']);
-        $rutaDestino = '../../../imagenes/publicaciones/' . $nombreArchivo;
+    // Contar publicaciones actuales del usuario
+    $sqlCount = "SELECT COUNT(*) as total FROM publicacion WHERE dni_usuario = ?";
+    $stmtCount = $conex->prepare($sqlCount);
+    $stmtCount->bind_param("i", $dni);
+    $stmtCount->execute();
+    $resultCount = $stmtCount->get_result();
+    $rowCount = $resultCount->fetch_assoc();
 
-        if (move_uploaded_file($_FILES['foto_publicacion']['tmp_name'], $rutaDestino)) {
-            $sqlPub = "INSERT INTO publicacion (foto_publicacion, descripcion, dni_usuario) VALUES (?, ?, ?)";
-            $stmtPub = $conex->prepare($sqlPub);
-            $stmtPub->bind_param("ssi", $nombreArchivo, $descripcion, $dni);
-            $stmtPub->execute();
+    if ($rowCount['total'] >= 3) {
+        // Si tiene 3 o más publicaciones, mostrar mensaje y no subir
+        echo "<script>alert('⚠️ Has alcanzado el límite de 3 publicaciones. Para subir más, necesitás comprar Premium o borrar algunas que ya tienes.');</script>";
+    } else {
+        // Permitir subir publicación
+        $descripcion = $_POST['descripcion'];
+
+        if (isset($_FILES['foto_publicacion']) && $_FILES['foto_publicacion']['error'] == 0) {
+            $nombreArchivo = 'pub_' . time() . '_' . basename($_FILES['foto_publicacion']['name']);
+            $rutaDestino = '../../../imagenes/publicaciones/' . $nombreArchivo;
+
+            if (move_uploaded_file($_FILES['foto_publicacion']['tmp_name'], $rutaDestino)) {
+                $sqlPub = "INSERT INTO publicacion (foto_publicacion, descripcion, dni_usuario) VALUES (?, ?, ?)";
+                $stmtPub = $conex->prepare($sqlPub);
+                $stmtPub->bind_param("ssi", $nombreArchivo, $descripcion, $dni);
+                $stmtPub->execute();
+            }
         }
     }
 
     // Redirigir para evitar reenvío al recargar
-    header("Location: " . $_SERVER['PHP_SELF']);
+    echo "<script>window.location.href = window.location.href;</script>";
     exit();
 }
 
