@@ -148,15 +148,6 @@ input[type="file"] {
 
 /**//* */
 
-.calificaciones-box {
-  max-width: 800px !important;
-  margin: 30px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
 .calificaciones-box h2 {
   margin-top: 0;
   font-size: 20px;
@@ -164,10 +155,25 @@ input[type="file"] {
   color: #333;
 }
 
+.calificaciones-box {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+}
+
 .calificaciones-scroll {
-  max-height: 250px;
-  overflow-y: auto;
+  max-height: 250px;     /* altura del scroll */
+  overflow-y: auto;      /* scroll vertical */
   padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;             /* separación entre tarjetas */
 }
 
 .calificacion-card {
@@ -175,8 +181,11 @@ input[type="file"] {
   border-left: 4px solid #5e5b64;
   padding: 12px 15px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  width: 100%;           /* ocupa todo el ancho */
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
+
 
 .calificacion-card .estrella {
   color: #f39c12;
