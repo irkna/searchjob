@@ -17,6 +17,12 @@ session_start();
     font-size: 25px;
     text-shadow:2px 2px  #f2d8c6/*color del sombreado del titulo*/
 }
+  .mingo {
+  width: 250px;  
+  height: auto;   
+  display: block;
+  margin: 0 auto; 
+}/*probando*/
 </style>
 </head>
 <body>
@@ -82,6 +88,15 @@ session_start();
 
       </div>
     </section>
+<hr>
+<br>
+      <h2 data-texto="tituloAyudaguia">Guia de ayuda </h2>
+            <p>Este video te ayudara a poder crear el link de pago que luego deberas poner en tu perfil</p>
+
+    <video width="1240" height="760" controls>
+  <source src="../../../imagenes/guia-mp.mp4" type="video/mp4">
+  Tu navegador no soporta la etiqueta de video.
+</video><br><br><br>
   </main>
 
   <footer>
@@ -204,7 +219,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- CHATBOT DE MINGO -->
 <div id="chatbot-mingo">
   <div id="chat-header">
-    <img src="../../../imagenes/mingo.png" alt="Mingo" id="mingo-avatar">
+    <img src="../../../imagenes/minimingo.png" alt="Mingo" id="mingo-avatar">
     <span>Mingo - Tu asistente</span>
     <button id="cerrar-chat">✖</button>
   </div>
@@ -216,7 +231,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <!-- Botón flotante -->
-<button id="abrir-chat">💬</button>
+<button id="abrir-chat">😸</button>
 
 <style>
   #abrir-chat {
@@ -325,7 +340,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const respuestas = {
        "contratar": "Para contratar a un profesional usá el buscador y enviá una solicitud desde su perfil.",
-    "pago": "Podés pagar con Mercado Pago dentro de la plataforma.",
+    "pagar": "Podés pagar con Mercado Pago dentro de la plataforma.",
     "turno": "Los turnos seran dados según la disponibilidad del profesional,una ves contratados llegan a un acuerdo en comun para realizar el trabajo.",
     "chat": "Tenés un chat interno para hablar con el profesional antes de confirmar el servicio.",
     "reseña": "Después del servicio podés dejar una calificación sobre el profesional.",
@@ -356,7 +371,7 @@ const respuestas = {
 "ayuda": "Podés preguntarme sobre contratar, pagar, chatear o reseñas. Estoy para ayudarte.",
 "chiste": "¿Querés un chiste? 😸  ¿Qué es mas frio que un hielo? ¡Un hincha de river!",
 "metodos pago": "Aceptamos pagos con Mercado Pago a través de links seguros que cada profesional tiene en su perfil.",
-"cvu": "Cada profesional puede cargar su CVU o link de pago en su perfil para que abones directo.",
+"link de pago": "Cada profesional puede cargar su link de pago en su perfil para que abonen directo a su mp.En ayuda tenes una guia de como obtener uno",
 "comprobante": "Después de pagar, podés guardar el comprobante por seguridad, aunque el sistema ya registra el pago.",
 "quetal": "Esta página es una plataforma para conectar clientes con trabajadores y profesionales de distintos rubros.",
 "parasirve": "Sirve para buscar, contratar y pagar de forma segura a profesionales que ofrecen sus servicios.",
@@ -384,7 +399,6 @@ const respuestas = {
 "finaliza contrato": "Cuando el trabajo está hecho, podés finalizar el pedido y dejar una reseña del profesional.",
 "historial": "Tus pedidos finalizados quedan guardados como historial para que los revises cuando quieras.",
 "reclamo": "Si tuviste un problema con un pedido, podés reportarlo desde el detalle del contrato.",
-
     "default": "Soy Mingo 😸 . No entendí tu pregunta, podrias utilizar palabras mas especificas sobre lo que necesites saber",
   };
 
@@ -419,12 +433,12 @@ const respuestas = {
     if (e.key === "Enter") procesarMensaje();
   });
 
-  // 👇 Al abrir el chat, Mingo saluda automáticamente
+  //  Al abrir el chat, Mingo saluda automáticamente
   abrirChat.addEventListener("click", () => {
     chatbot.style.display = "flex";
     chatBody.innerHTML = ""; // limpia mensajes anteriores
     setTimeout(() => {
-      agregarMensaje("¡Hola! Soy Mingo 🐧. Estoy acá para ayudarte. Preguntame lo que quieras sobre la plataforma 🚀", "mingo");
+      agregarMensaje("¡Hola! Soy Mingo 😸. Estoy acá para ayudarte. Preguntame lo que quieras sobre la plataforma 🚀", "mingo");
     }, 300);
   });
 
