@@ -18,7 +18,7 @@ session_start();
     text-shadow:2px 2px  #f2d8c6/*color del sombreado del titulo*/
 }
 </style>
-</head>
+</head> 
 <body>
   <header>
     <div class="logo">
@@ -205,7 +205,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- CHATBOT DE MINGO -->
 <div id="chatbot-mingo">
   <div id="chat-header">
-    <img src="../../../imagenes/mingo.png" alt="Mingo" id="mingo-avatar">
+    <img src="../../../imagenes/minimingo.png" alt="Mingo" id="mingo-avatar">
     <span>Mingo - Tu asistente</span>
     <button id="cerrar-chat">✖</button>
   </div>
@@ -217,7 +217,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <!-- Botón flotante -->
-<button id="abrir-chat">💬</button>
+<button id="abrir-chat">😸</button>
 
 <style>
   #abrir-chat {

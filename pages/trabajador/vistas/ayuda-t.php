@@ -18,7 +18,7 @@ session_start();
     text-shadow:2px 2px  #f2d8c6/*color del sombreado del titulo*/
 }
   .mingo {
-  width: 250px;  
+  width: 250px;   
   height: auto;   
   display: block;
   margin: 0 auto; 
