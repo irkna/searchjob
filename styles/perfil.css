@@ -109,16 +109,20 @@ html,body{
     }
 
     
-    .perfil {
-      flex: 1;
-      max-width: 350px;
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
-      text-align: center;
-      position: relative;
-    }
+   .perfil {
+  flex: 1;
+  width: 100%;
+  max-width: 700px !important; 
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  position: relative;
+  margin: 0 auto; /* centra el perfil */
+}
+
+
 
     /* Contenedor para la foto con efecto hover */
 .foto-container {

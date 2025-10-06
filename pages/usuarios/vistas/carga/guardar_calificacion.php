@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_check = $check_stmt->get_result();
 
     if ($result_check->num_rows > 0) {
-        echo "<script>alert('Ya calificaste a este trabajador.');history.back();</script>";
+        echo "<script>alert('Ya calificaste a este usuario.');history.back();</script>";
         exit();
     }
 
