@@ -120,6 +120,11 @@ footer {
   color: #0e0a04ff;
   font-size: 1.5em;
 }
+.perfil-container {
+  width: 80%; 
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
 .formulario-calificacion {
   background: #fff;
