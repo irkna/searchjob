@@ -132,7 +132,7 @@ if (isset($_POST['eliminar_publicacion'])) {
     margin: 0 auto 20px auto;
     display: block;
   }
-
+}
     .tarjeta {
   background-color: #fff;
   border-radius: 12px;
