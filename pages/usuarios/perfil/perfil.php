@@ -7,7 +7,7 @@ if (!isset($_SESSION['dni'])) {
     exit();
 }
 
-$dni = $_SESSION['dni'];
+$dni = $_SESSION['dni']; 
 $sql = "SELECT u.nombre, u.telefono, u.localidad, u.foto_perfil 
         FROM usuarios u 
         WHERE u.dni = ?"; 
@@ -109,8 +109,43 @@ if (isset($_POST['eliminar_publicacion'])) {
 
   <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+
+    <style>
+@media (max-width: 600px) {
+
+ 
+
+  /* El body y html se ajustan al contenido completo */
+  html, body {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Asegura que el perfil no se corte */
+  .perfil {
+    margin-top:10%;
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 20px;
+  }
+
+  /* Publicaciones y calificaciones apiladas */
+  .publicaciones,
+  .calificaciones {
+    width: 100%;
+    text-align:center;
+    margin: 0 auto 20px auto;
+    display: block;
+  }
+
     .tarjeta {
   background-color: #fff;
   border-radius: 12px;
