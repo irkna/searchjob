@@ -4,11 +4,13 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es"> 
-<head>
+<head> 
   <meta charset="UTF-8">
   <title data-texto="tituloPagina">Ayuda - Search Job</title>
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   span {
@@ -22,8 +24,101 @@ session_start();
   height: auto;   
   display: block;
   margin: 0 auto; 
-}/*probando*/
+}
+video, iframe {
+  width: 100%;
+  max-width: 900px;   /* ancho máximo en pantallas grandes */
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+
+/* --- Ajustes responsive extra --- */
+@media (max-width: 768px) {
+  h2[data-texto="tituloAyudaguia"] { font-size: 2.2rem !important; }
+  p[data-texto="introAyud"] { font-size: 1.25rem !important; }
+  .container-menu .cont-menu nav a { font-size: 1.0rem !important; padding: 14px 12px !important; }
+  header nav a { font-size: 1.0rem !important; }
+  ul label[for="btn-menu"] { font-size: 36px !important; }
+}
+
+/* Forzar que todo ocupe el 100% y evitar scroll horizontal */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evita scroll horizontal si algo se sale */
+}
+
+/* Header full width */
+header {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative; /* para que perfil absoluto se posicione bien */
+}
+
+/* Logo y nav dentro del header */
+header .logo, header nav {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* Chat Mingo responsivo */
+@media (max-width: 768px) {
+  #chatbot-mingo {
+    width: 90%;        /* 90% del ancho de la pantalla */
+    height: 70%;       /* altura proporcional */
+    bottom: 80px;      /* espacio desde abajo */
+    right: 5%;         /* centrado horizontal */
+    max-width: 400px;  /* no exceder 400px */
+  }
+
+  #chat-header img {
+    width: 50px;
+    height: 50px;
+  }
+
+  #chat-input input {
+    font-size: 0.9rem;
+  }
+
+  #chat-input button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .mensaje {
+    max-width: 80%;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajuste para el perfil absoluto en móvil */
+@media (max-width: 600px) {
+  header .perfil-header {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  h2[data-texto="tituloAyudaguia"] { font-size: 1.9rem !important; }
+  p[data-texto="introAyud"] { font-size: 1.18rem !important; }
+  .container-menu .cont-menu nav a { font-size: 1.0rem !important; padding: 16px 12px !important; }
+  header nav a { font-size: 1.0rem !important; }
+  ul label[for="btn-menu"] { font-size: 25px !important; }
+  /* Reduce padding en la caja blanca para que el texto grande no haga overflow */
+  main .fondo > div[style] { padding: 12px !important; max-width: 96% !important; }
+}
 </style>
+
+
 </head>
 <body>
   <header>
@@ -91,7 +186,7 @@ session_start();
 <hr>
 <br>
       <h2 data-texto="tituloAyudaguia">Guia de ayuda </h2>
-            <p>Este video te ayudara a poder crear el link de pago que luego deberas poner en tu perfil</p>
+            <p data-texto="introAyud">Este video te ayudara a poder crear el link de pago que luego deberas poner en tu perfil</p>
 
     <video width="1240" height="760" controls>
   <source src="../../../imagenes/guia-mp.mp4" type="video/mp4">

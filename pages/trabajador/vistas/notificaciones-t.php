@@ -24,6 +24,59 @@ $notificaciones = $res->fetch_all(MYSQLI_ASSOC);
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  
+    /* ======== RESPONSIVE ======== */
+    @media (max-width: 768px) {
+   
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+        font-size: 15px;
+      }
+
+      main.search-section {
+        padding: 15px;
+      }
+
+      .fondo {
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .notificacion-box div {
+        font-size: 15px;
+        padding: 12px;
+      }
+
+  
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 8px;
+      }
+
+      .fondo h2 {
+        font-size: 20px;
+      }
+
+      .fondo p {
+        font-size: 14px;
+      }
+
+      .notificacion-box div {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .notificacion-box small {
+        font-size: 12px;
+      }
+    }
+</style>
 </head>
 <body>
   <header>

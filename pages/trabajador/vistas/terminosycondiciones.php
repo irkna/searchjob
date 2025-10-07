@@ -9,7 +9,35 @@ session_start();
   <title>Términos y Condiciones</title>
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* --- RESPONSIVE PARA CELULAR --- */
+    @media (max-width: 768px) {
+    
+
+      ul label {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        z-index: 10001;
+      }
+
+      .fondo {
+        width: 90%;
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .fondo p, .fondo strong {
+        font-size: 15px;
+      }
+    }</style> 
 </head>
 <body>
   <header>
@@ -47,10 +75,11 @@ session_start();
           <nav><br>
      
   <a href="../index-t.php" data-texto="home">Home</a>
-  <a href="premium.html" data-texto="premium">Premium</a>
+  <a href="premium-t.html" data-texto="premium">Premium</a>
   <a href="categorias-t.php" data-texto="categorias">Categorías</a>
   <a href="notificaciones-t.php" data-texto="bandeja">Bandeja de entrada</a>
-    <a href="" data-texto="adminPedidos">Administrador de pedidos</a>
+    <a href="adminPedidos-t.php" data-texto="adminPedidos">Administrador de pedidos</a>
+    <a href="chat.php">Chat</a>
   <a href="configuracion-t.php" data-texto="configuracionMenu">Configuración</a>
   <a href="ayuda-t.php" data-texto="ayuda">Ayuda</a>
 </nav>
@@ -71,11 +100,14 @@ session_start();
     </div>
     </section>
   </main>
-  <footer>
-    <span>Search Job</span>
-    <div class="mainfooter">&copy; 2025 Search Job.</div>
-  </footer>
-
+ <footer>
+  <span>Search Job</span>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/searchjobofficial" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://whatsapp.com/channel/0029Vb6GsJ0HFxP99lJCxN2w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://x.com/SearchJob_offic" target="_blank"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
   <script>
 function aplicarTemaGlobal() {
   const tema = localStorage.getItem('tema');
