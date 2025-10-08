@@ -289,7 +289,7 @@ header .logo, header nav {
   }
 }
 
-} 
+}
 
 </style>
 
