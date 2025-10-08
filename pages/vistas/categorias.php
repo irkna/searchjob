@@ -10,6 +10,7 @@ session_start();
   <link rel="stylesheet" href="../../styles/style.css">
   <link rel="icon" href="../../imagenes/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style> 
     .perfiles { width: 100%; box-sizing: border-box; margin-top: -70px; margin-bottom:40px; }
@@ -42,7 +43,7 @@ session_start();
   padding: 8px 12px;
   border: none;
   border-radius: 6px;
-  background: #eed8c9;
+  background: #565555ff;
   cursor: pointer;
 }
 
@@ -51,6 +52,204 @@ session_start();
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
+
+/**//*publciaciones */
+.publicaciones {
+  width: 100%;
+  margin: 60px auto;
+  max-width: 1200px;
+}
+
+.grid-publicaciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.card-publicacion {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-publicacion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.pub-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.pub-foto-perfil {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.pub-nombre {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.pub-body {
+  padding: 15px;
+}
+
+.pub-foto {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.pub-descripcion {
+  font-size: 14px;
+  color: #555;
+}
+.grid-publicaciones a {
+  display: block;
+}
+
+.grid-publicaciones a:hover .card-publicacion {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+
+
+/* ==== RESPONSIVE GRID Y BOTONES ==== */
+
+/* Grid de publicaciones y perfiles: dos columnas en pantallas chicas */
+@media (max-width: 1024px) {
+  .grid-publicaciones,
+  .grid-perfiles {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 15px;
+  }
+}
+
+/* En pantallas muy chicas (celulares), mantiene dos columnas */
+@media (max-width: 600px) {
+  .botones-grid {
+    flex-wrap: nowrap;       /* no bajan de línea */
+    overflow-x: auto;        /* scroll horizontal si no caben */
+    -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
+    gap: 8px;
+  }
+
+  .filtro-btn {
+    flex: 0 0 auto;          /* que no se achiquen */
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+/* Barra de búsqueda en celular */
+  .search-form {
+    flex-direction: column;  /* los grupos se apilen */
+    align-items: center;
+    gap: 10px;
+    max-width: 90%;
+    margin: 20px auto;
+  }
+
+  /* Contenedor del input + lupa */
+  .search-form .input-lupa {
+    display: flex;
+    width: 100%;
+    gap: 5px;               /* espacio entre input y botón */
+  }
+
+  .search-form input {
+    flex: 1;                 /* ocupa el espacio disponible */
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .search-form button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #565555ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .search-form select {
+    width: 100%;             /* select ocupa toda la fila */
+    margin-top: 8px;
+  }
+
+
+}
+
+/* Si la pantalla es ultra pequeña, pasa a una columna */
+@media (max-width: 600px) {
+  .grid-publicaciones,
+  .grid-perfiles {
+    grid-template-columns: 1fr;
+  }
+  .container-menu .cont-menu nav a { font-size: 1.0rem !important; padding: 16px 7px !important; }
+/* Ocultar botones en pantallas chicas (celular) */
+@media (max-width: 600px) {
+  .botones-grid {
+    display: none;
+  }
+}
+
+
+/* Ajuste de texto general para que se vea más grande */
+body, p, h1, h2, h3, a, button, select, input {
+  font-size: 1.05rem;
+}
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.4rem; }
+}
+/* Forzar que todo ocupe el 100% y evitar scroll horizontal */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evita scroll horizontal si algo se sale */
+}
+
+/* Header full width */
+header {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative; /* para que perfil absoluto se posicione bien */
+}
+
+/* Logo y nav dentro del header */
+header .logo, header nav {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Ajuste para el perfil absoluto en móvil */
+@media (max-width: 600px) {
+  header .perfil-header {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -92,17 +291,19 @@ session_start();
       <p data-texto="introCategorias">Elegí una categoría para encontrar el profesional adecuado para tu necesidad.</p>
 
       <!-- Barra de búsqueda y filtros -->
-      <form method="GET" action="categorias.php" class="search-form" style="text-align:center;">
-        <input type="text" name="query" placeholder="Buscar por nombre, ocupación o localidad" 
-               value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
-        <button type="submit"><i class="fas fa-search"></i></button>
-        <select name="ordenar" onchange="this.form.submit()">
-          <option value="">Ordenar por...</option>
-          <option value="nombre" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='nombre') echo 'selected'; ?>>Nombre</option>
-          <option value="ocupacion" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='ocupacion') echo 'selected'; ?>>Ocupación</option>
-          <option value="localidad" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='localidad') echo 'selected'; ?>>Localidad</option>
-        </select>
-      </form>
+    <form method="GET" action="categorias-t.php" class="search-form">
+  <div class="input-lupa">
+    <input type="text" name="query" placeholder="Buscar nombre o ocupacion " 
+           value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
+    <button type="submit"><i class="fas fa-search"></i></button>
+  </div>
+  <select name="ordenar" onchange="this.form.submit()">
+    <option value="">Ordenar por...</option>
+    <option value="nombre" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='nombre') echo 'selected'; ?>>Nombre</option>
+    <option value="ocupacion" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='ocupacion') echo 'selected'; ?>>Ocupación</option>
+    <option value="localidad" <?php if(isset($_GET['ordenar']) && $_GET['ordenar']=='localidad') echo 'selected'; ?>>Localidad</option>
+  </select>
+</form>
 
       <!-- Categorías -->
       <div class="botones-grid" style="margin-top: 30px;">

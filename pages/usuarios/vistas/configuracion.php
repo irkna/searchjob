@@ -10,7 +10,73 @@ session_start();
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <style>
+      /* ======== RESPONSIVE ======== */
+    @media (max-width: 768px) {
+   
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+        font-size: 16px;
+      }
+
+      .config-box {
+        width: 90%;
+        padding: 15px;
+        margin: 10px auto;
+      }
+
+      .config-box h3 {
+        font-size: 18px;
+      }
+
+      span {
+        font-size: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+    
+
+      .social-icons {
+        margin-top: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 8px;
+      }
+
+      .config-box {
+        width: 95%;
+        padding: 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      span {
+        font-size: 16px;
+      }
+
+      select, input[type="radio"] {
+        transform: scale(1.1);
+      }
+
+      footer span {
+        font-size: 16px;
+      }
+    }
       /* Tema claro */
     body.tema-claro {
       background-color: #f9f9f9 !important;

@@ -76,9 +76,48 @@ $calificaciones = $res_cal->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <style>
+@media (max-width: 600px) {
 
+ 
+
+  /* El body y html se ajustan al contenido completo */
+  html, body {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Asegura que el perfil no se corte */
+  .perfil {
+    margin-top:10%;
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 20px;
+  }
+
+  /* Publicaciones y calificaciones apiladas */
+  .publicaciones,
+  .calificaciones {
+    width: 100%;
+    text-align:center;
+    margin: 0 auto 20px auto;
+    display: block;
+  }
+
+
+
+
+
+}
 .calificaciones {
   max-width: 400px !important;
   margin: 60px auto 20px;

@@ -9,7 +9,35 @@ session_start();
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* --- RESPONSIVE  --- */
+    @media (max-width: 768px) {
+    
+
+      ul label {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        z-index: 10001;
+      }
+
+      .fondo {
+        width: 90%;
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .fondo p, .fondo strong {
+        font-size: 15px;
+      }
+    }</style>
 </head>
 <body>
   <header>

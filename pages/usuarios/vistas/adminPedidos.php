@@ -183,6 +183,95 @@ $resultFinalizados = mysqli_stmt_get_result($stmt2);
   <link rel="stylesheet" href="../../../styles/style.css">
   <link rel="icon" href="../../../imagenes/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  @media screen and (max-width: 768px) {
+  h2, h3 {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 15px !important;
+  }
+span{
+  font-size:15px !important;
+}
+  header nav a {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  .container-menu .cont-menu nav a { font-size: 1.0rem !important; padding: 16px 12px !important; }
+
+  /* Centrar imágenes y texto en tarjetas */
+  .pedido-card div[style*="display:flex"] {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pedido-card img {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 10px;
+  }
+
+  /* Formularios en columna */
+  .pedido-card form label span {
+    font-size: 13px;
+  }
+
+  .pedido-card input,
+  .pedido-card button {
+    font-size: 14px;
+  }
+
+  /* Botones apilados */
+  .pedido-card form div[style*="gap:10px"] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Footer más pequeño */
+  footer {
+    font-size: 16px;
+  }
+  /* Forzar que todo ocupe el 100% y evitar scroll horizontal */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evita scroll horizontal si algo se sale */
+}
+
+/* Header full width */
+header {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative; /* para que perfil absoluto se posicione bien */
+}
+
+/* Logo y nav dentro del header */
+header .logo, header nav {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Ajuste para el perfil absoluto en móvil */
+@media (max-width: 600px) {
+  header .perfil-header {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+  }
+}
+
+} 
+
+</style>
 </head>
 <body>
   <header>

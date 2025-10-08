@@ -9,12 +9,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* estilos responsive y generales ya presentes */
-        @media (max-width: 768px) {
-            header { flex-direction: column; align-items: flex-start; }
-            header .logo { width: 100%; text-align: left; margin-top: 10px; gap: 10px; }
-            .card-container { flex-direction: column; gap: 20px; }
-            footer { flex-direction: column; text-align: center; gap: 10px; }
-        }
+     @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header .logo {
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    /* Los botones uno al lado del otro */
+    .card-container {
+        flex-direction: row;          /* Mantiene los dos en una fila */
+        justify-content: center;      /* Centra horizontalmente */
+        gap: 20px;                    /* Espacio entre los dos */
+        flex-wrap: wrap;              /* Permite que bajen si no entra */
+    }
+
+    .card {
+        width: 40%;                   /* Ocupa menos ancho para que entren lado a lado */
+        height: auto;                 /* Se ajusta automáticamente */
+    }
+
+     }
 
         body {
             font-family: 'Poppins', sans-serif;
