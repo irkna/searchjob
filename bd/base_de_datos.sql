@@ -19,7 +19,7 @@ CREATE TABLE `trabajador` (
   `matricula` VARCHAR(50) NOT NULL,
   `ocupacion` VARCHAR(100) NOT NULL,
   `linkdepago` VARCHAR(255) DEFAULT NULL,  
-  `identificador` BIGINT NOT NULL,
+  `identificador` INT NOT NULL,
   FOREIGN KEY (`identificador`) REFERENCES usuarios(`dni`)
 );
 
@@ -95,6 +95,7 @@ CREATE TABLE `mensajes` (
 );
 
 ALTER TABLE mensajes ADD COLUMN leido TINYINT(1) DEFAULT 0;
+
 
 
 
