@@ -169,6 +169,15 @@ header .logo, header nav {
       <p data-texto="introAyuda">¿Tenés dudas o preguntas? Acá te respondemos las más comunes.</p>
       <div style="text-align: left; max-width: 700px; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); background: white; color: #333;">
         
+      
+        <p><strong data-texto="preg0">Sobre el IVA en tus pagos</strong><br>
+        <span data-texto="resp0">
+
+Cuando te realicen un pago,es posible que veas que el total se reduce un poco. Es porque se descuenta el IVA .
+
+El cual es un impuesto que se aplica a ciertos productos/servicios según la ley. Por eso parte de ese dinero se destina automáticamente a cubrir este impuesto,
+ y el resto es lo que recibes del servicio.</span></p>
+
         <p><strong data-texto="preg1">¿Cómo contrato a un profesional?</strong><br>
         <span data-texto="resp1">Usá el buscador, elegí una categoría y enviá una solicitud desde su perfil.</span></p>
 
@@ -180,6 +189,7 @@ header .logo, header nav {
 
         <p><strong data-texto="preg4">¿Puedo ofrecer mis servicios en más de una categoría?</strong><br>
         <span data-texto="resp4">Sí, podés editar tu perfil y agregar habilidades o especialidades extra.</span></p>
+
 
       </div>
     </section>
