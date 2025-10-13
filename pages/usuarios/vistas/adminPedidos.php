@@ -358,6 +358,14 @@ header .logo, header nav {
             <p style="margin:0;"><b>Trabajador:</b> <?php echo htmlspecialchars($c['nombre_trabajador']); ?></p>
           </div>
         </a>
+           <div style="margin:10px; max-width:2500px; gap:10px; flex-wrap:wrap;">
+        <a href="pagar.php?id=<?php echo (int)$c['id_servicio']; ?>" 
+   style="background:#0275d8;color:#fff;padding:8px 14px;border:none;border-radius:8px;
+          border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block;">
+   Pagar
+</a>
+
+          </button></div>
       </div>
 
       <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
