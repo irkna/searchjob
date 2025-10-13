@@ -362,10 +362,13 @@ input[type="file"] {
        style="color: var(--accent-color); text-decoration: underline;">
       <?= htmlspecialchars($usuario['linkdepago']) ?>
     </a>
+    
   <?php else: ?>
     <span> Agregue un link de pago </span>
   <?php endif; ?>
 </div>
+  <br> <a href="../vistas/ayuda-t.php"> Se le cobrara 6.29% por el IVA en cada pago</a>
+
 
 
       
