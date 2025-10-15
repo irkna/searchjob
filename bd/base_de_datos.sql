@@ -82,6 +82,11 @@ CREATE TABLE `contrato` (
   FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`)
 );
 ALTER TABLE contrato ADD COLUMN estado ENUM('pendiente','en_curso','entregado','finalizado','cancelado') DEFAULT 'en_curso';
+ALTER TABLE contrato 
+MODIFY COLUMN estado ENUM('pendiente','en_curso','entregado','finalizado','cancelado','pagado') 
+DEFAULT 'en_curso';
+
+ALTER TABLE contrato ADD COLUMN numero_operacion VARCHAR(50) NULL AFTER estado;
 
 
 CREATE TABLE `mensajes` (

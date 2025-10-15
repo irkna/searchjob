@@ -38,6 +38,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
 
     $accion = $_POST['accion'];
 
+if ($accion === 'guardar_operacion') {
+    $id = (int)($_POST['id_servicio'] ?? 0);
+    $numero_operacion = trim($_POST['numero_operacion'] ?? '');
+
+    if ($id > 0 && $numero_operacion !== '') {
+        $sql = "UPDATE contrato SET numero_operacion = ?, estado = 'finalizado' 
+                WHERE id_servicio = ? AND dni_usuario = ?";
+        if ($stmt = $db->prepare($sql)) {
+            $stmt->bind_param("sii", $numero_operacion, $id, $dni);
+            if ($stmt->execute()) {
+                $flash['ok'][] = "Contrato #$id finalizado correctamente con número de operación.";
+            } else {
+                $flash['err'][] = "Error al guardar el número de operación.";
+            }
+        }
+    } else {
+        $flash['err'][] = "Debes ingresar un número de operación válido.";
+    }
+}
+
+
     if ($accion === 'actualizar') {
         $id = (int) ($_POST['id_servicio'] ?? 0);
         $ubicacion = trim($_POST['ubicacion'] ?? '');
@@ -164,11 +185,13 @@ $resultActivos = mysqli_stmt_get_result($stmt);
 // Pedidos finalizados
 $sqlFinalizados = "SELECT c.id_servicio, c.dni_trabajador, c.costo, c.metodo_de_pago,
                           c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
+                          c.numero_operacion,
                           u.nombre AS nombre_trabajador, u.foto_perfil AS foto_trabajador
                    FROM contrato c
                    JOIN usuarios u ON u.dni = c.dni_trabajador
                    WHERE c.dni_usuario=? AND c.estado = 'finalizado'
                    ORDER BY c.fecha_y_hora DESC";
+
 $stmt2 = mysqli_prepare($db, $sqlFinalizados);
 mysqli_stmt_bind_param($stmt2, "i", $dni);
 mysqli_stmt_execute($stmt2);
@@ -274,6 +297,7 @@ header .logo, header nav {
 </style>
 </head>
 <body>
+
   <header>
     <div class="logo">
       <a href="../index-u.php">
@@ -295,6 +319,11 @@ header .logo, header nav {
       <?php endif; ?>
     </nav>
   </header>
+<?php if (isset($_GET['finalizado'])): ?>
+  <div style="background:#e6ffed; border:1px solid #b7f5c5; padding:10px; border-radius:8px; margin:10px auto; width:fit-content; color:#1e7a3b;">
+    <i class="fa-solid fa-circle-check"></i> ¡El contrato fue pagado y finalizado con éxito!
+  </div>
+<?php endif; ?>
 
   <!--boton de barra--------------->
   <ul>
@@ -359,13 +388,32 @@ header .logo, header nav {
           </div>
         </a>
            <div style="margin:10px; max-width:2500px; gap:10px; flex-wrap:wrap;">
-        <a href="pagar.php?id=<?php echo (int)$c['id_servicio']; ?>" 
+      <a href="pagar.php?id_servicio=<?php echo (int)$c['id_servicio']; ?>" 
    style="background:#0275d8;color:#fff;padding:8px 14px;border:none;border-radius:8px;
-          border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block;">
+          cursor:pointer;text-decoration:none;display:inline-block;">
    Pagar
 </a>
 
+
           </button></div>
+          <?php
+// Si el contrato tiene un estado de "pagado" pero no tiene número de operación
+if ($c['estado'] === 'pagado' && empty($c['numero_operacion'])): ?>
+  <form method="POST" style="margin-top:10px;">
+    <input type="hidden" name="id_servicio" value="<?php echo (int)$c['id_servicio']; ?>">
+    <label>
+      <span><b>Ingrese el número de operación:</b></span><br>
+      <input type="text" name="numero_operacion" placeholder="Ej: #1234567890" required>
+    </label>
+    <button type="submit" name="accion" value="guardar_operacion"
+      style="background:#28a745;color:#fff;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;margin-top:6px;">
+      Guardar número de operación
+    </button>
+  </form>
+<?php elseif (!empty($c['numero_operacion'])): ?>
+  <p><b>Número de operación:</b> <?php echo htmlspecialchars($c['numero_operacion']); ?></p>
+<?php endif; ?>
+
       </div>
 
       <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
@@ -433,6 +481,11 @@ header .logo, header nav {
           </div>
         </a>
       </div>
+<?php if (!empty($c['numero_operacion'])): ?>
+  <p><b>Número de operación:</b> <?php echo htmlspecialchars($c['numero_operacion']); ?></p>
+<?php else: ?>
+  <p><b>Número de operación:</b> No registrado</p>
+<?php endif; ?>
 
       <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
       <p><b>Servicio:</b> <?php echo htmlspecialchars($c['descripcion']); ?></p>
