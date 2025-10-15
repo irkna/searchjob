@@ -6,15 +6,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dni_trabajador = $_POST['dni_trabajador'];
     $dni_usuario = $_SESSION['dni']; 
     $costo = $_POST['costo'];
-    $metodo_de_pago = $_POST['metodo_de_pago'];
     $descripcion = $_POST['descripcion'];
     $ubicacion = $_POST['ubicacion'];
     $fecha_y_hora = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO contrato (dni_trabajador, dni_usuario, costo, metodo_de_pago, fecha_y_hora, descripcion, ubicacion)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO contrato (dni_trabajador, dni_usuario, costo,  fecha_y_hora, descripcion, ubicacion)
+            VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conex->prepare($sql);
-    $stmt->bind_param("iiissss", $dni_trabajador, $dni_usuario, $costo, $metodo_de_pago, $fecha_y_hora, $descripcion, $ubicacion);
+    $stmt->bind_param("iiisss", $dni_trabajador, $dni_usuario, $costo,  $fecha_y_hora, $descripcion, $ubicacion);
 
     if ($stmt->execute()) {
         // Crear notificación para el trabajador
