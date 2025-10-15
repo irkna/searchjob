@@ -532,7 +532,7 @@ body.modo-oscuro label {
 
 <!-- Botón contratar solo si es trabajador -->
 <button type="button" onclick="abrirFormulario()">Contratar</button>
-<?php endif; ?>
+<?php endif; ?> 
 
 <!-- Modal Contratar -->
 <div id="modalContratar" class="modal" style="display:none;">

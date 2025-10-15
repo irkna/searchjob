@@ -297,7 +297,7 @@ header .logo, header nav {
     <h2 data-texto="tituloPrincipal">Encuentra un profesional <br><b><span class="Arial Black">ADECUADO</span></b></h2>
       <br>
       <!-- Barra de búsqueda y filtros -->
-     <form method="GET" action="categorias.php" class="search-form">
+     <form method="GET" action="vistas/categorias.php" class="search-form">
   <div class="input-lupa">
     <input type="text" name="query" placeholder="Buscar nombre o ocupacion " 
            value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
