@@ -165,31 +165,32 @@ $dni = $_SESSION['dni']; // DNI del usuario logueado
 $contratos = [];
 
 // Consulta: trae los contratos donde el usuario es cliente o trabajador
-// Pedidos activos (todos menos finalizado)
+// Pedidos activos
 $sqlActivos = "SELECT 
-    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, c.metodo_de_pago,
+    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, 
     c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
     u.dni AS dni_asociado, u.nombre AS nombre_asociado, u.foto_perfil AS foto_asociado
   FROM contrato c
-  JOIN usuarios u ON u.dni = IF(c.dni_usuario=?, c.dni_trabajador, c.dni_usuario)
-  WHERE (c.dni_usuario=? OR c.dni_trabajador=?) AND c.estado <> 'finalizado'
+  JOIN usuarios u ON u.dni = c.dni_usuario
+  WHERE c.dni_trabajador=? AND c.estado <> 'finalizado'
   ORDER BY c.fecha_y_hora DESC";
 $stmtA = $conex->prepare($sqlActivos);
-$stmtA->bind_param("iii", $dni, $dni, $dni);
+$stmtA->bind_param("i", $dni);
 $stmtA->execute();
 $resultActivos = $stmtA->get_result();
 
+
 // Trabajos finalizados
 $sqlFinalizados = "SELECT 
-    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, c.metodo_de_pago,
-    c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
+    c.id_servicio, c.dni_usuario, c.dni_trabajador, c.costo, 
+    c.numero_operacion, c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
     u.dni AS dni_asociado, u.nombre AS nombre_asociado, u.foto_perfil AS foto_asociado
   FROM contrato c
-  JOIN usuarios u ON u.dni = IF(c.dni_usuario=?, c.dni_trabajador, c.dni_usuario)
-  WHERE (c.dni_usuario=? OR c.dni_trabajador=?) AND c.estado = 'finalizado'
+  JOIN usuarios u ON u.dni = c.dni_usuario
+  WHERE c.dni_trabajador=? AND c.estado = 'finalizado'
   ORDER BY c.fecha_y_hora DESC";
 $stmtF = $conex->prepare($sqlFinalizados);
-$stmtF->bind_param("iii", $dni, $dni, $dni);
+$stmtF->bind_param("i", $dni);
 $stmtF->execute();
 $resultFinalizados = $stmtF->get_result();
 
@@ -404,18 +405,12 @@ header .logo, header nav {
                  value="<?php echo htmlspecialchars($c['costo']); ?>" 
                  style="width:100%;" required>
         </label>             
-
+ 
         <div style="margin:10px; max-width:2500px; gap:10px; flex-wrap:wrap;">
           <button class="btn" type="submit" name="accion" value="actualizar" style="background:#eed8c9;color:#333;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Guardar cambios</button>
           <button class="btn" type="submit" name="accion" value="cancelar" onclick="return confirm('¿Seguro que querés cancelar este contrato?');" style="background:#d9534f;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">Cancelar contrato</button>
 
-          <?php if ($c['estado'] !== 'finalizado'): ?>
-            <button class="btn" type="submit" name="accion" value="entregado"
-                    onclick="return confirm('¿Confirmás que terminaste el trabajo?');"
-                    style="background:#5cb85c;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;">
-              Finalizar contrato
-            </button>
-          <?php endif; ?>
+      
         </div>
       </form><br>
     </div><br><br>
@@ -443,6 +438,7 @@ header .logo, header nav {
           </div>
         </a>
       </div>
+<p><b>Número de operación:</b> <?php echo htmlspecialchars($c['numero_operacion'] ?? '—'); ?></p>
 
       <p><strong>Estado:</strong> <?php echo ucfirst($c['estado']); ?></p>
       <p><b>Servicio:</b> <?php echo htmlspecialchars($c['descripcion']); ?></p>

@@ -513,12 +513,9 @@ body.modo-oscuro label {
     <?php 
         if (!empty($datos['linkdepago'])) {
             $link = trim($datos['linkdepago']);
-
-            // Si no empieza con http:// o https://, se lo agregamos
             if (!preg_match('/^https?:\/\//i', $link)) {
                 $link = 'https://' . $link;
             }
-
             echo '<a href="' . htmlspecialchars($link) . '" target="_blank" style="color: #007bff; text-decoration: none;">'
                 . htmlspecialchars($datos['linkdepago']) .
                 '</a>';
@@ -528,11 +525,14 @@ body.modo-oscuro label {
     ?>
 </div>
 
+<?php
+// Mostrar el botón "Contratar" solo si hay sesión iniciada y el perfil NO es el propio
+if (isset($_SESSION['dni']) && $_SESSION['dni'] != $dni): ?>
+    <button type="button" onclick="abrirFormulario()">Contratar</button>
+<?php endif; ?>
 
+<?php endif; ?>
 
-<!-- Botón contratar solo si es trabajador -->
-<button type="button" onclick="abrirFormulario()">Contratar</button>
-<?php endif; ?> 
 
 <!-- Modal Contratar -->
 <div id="modalContratar" class="modal" style="display:none;">

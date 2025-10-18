@@ -170,7 +170,7 @@ if ($accion === 'guardar_operacion') {
 
 // Traer contratos del usuario (cliente)
 // Pedidos activos (no finalizados)
-$sqlActivos = "SELECT c.id_servicio, c.dni_trabajador, c.costo, c.metodo_de_pago,
+$sqlActivos = "SELECT c.id_servicio, c.dni_trabajador, c.costo, 
                       c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
                       u.nombre AS nombre_trabajador, u.foto_perfil AS foto_trabajador
                FROM contrato c
@@ -183,7 +183,7 @@ mysqli_stmt_execute($stmt);
 $resultActivos = mysqli_stmt_get_result($stmt);
 
 // Pedidos finalizados
-$sqlFinalizados = "SELECT c.id_servicio, c.dni_trabajador, c.costo, c.metodo_de_pago,
+$sqlFinalizados = "SELECT c.id_servicio, c.dni_trabajador, c.costo, 
                           c.fecha_y_hora, c.descripcion, c.ubicacion, c.estado,
                           c.numero_operacion,
                           u.nombre AS nombre_trabajador, u.foto_perfil AS foto_trabajador
