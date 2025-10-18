@@ -525,44 +525,10 @@ body.modo-oscuro label {
 
 
 <!-- Botón contratar solo si es trabajador -->
-<button type="button" onclick="abrirFormulario()">Contratar</button>
+<button type="button" >Si desea contratar debe iniciar sesion como usuario</button>
 <?php endif; ?>
 
-<!-- Modal Contratar -->
-<div id="modalContratar" class="modal" style="display:none;">
-  <div class="modal-content form-contratar">
-    <span class="cerrar" onclick="cerrarFormulario()">&times;</span>
-    <h2>Contratar Servicio</h2>
-    <p>Este no es un contrato definitivo, el costo puede ser cambiado por el trabajor antes de ser confirmado, por eso para una mejor interaccion comuniquese primero con el trabajador antes de contratar. </p>
-    
-    <form method="POST" action="carga/guardar_contrato.php">
-      <input type="hidden" name="dni_trabajador" value="<?php echo $dni; ?>">
-      <input type="hidden" name="dni_usuario" value="<?php echo $_SESSION['dni']; ?>">
 
-      <div class="form-group">
-        <label>Costo deseado:</label>
-        <input type="number" name="costo" required>
-      </div>
-
-   
-
-      <div class="form-group">
-        <label>Descripción:</label>
-        <textarea name="descripcion" rows="3" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Ubicación:</label>
-        <input type="text" name="ubicacion" required>
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn-confirmar">Confirmar</button>
-        <button type="button" class="btn-cancelar" onclick="cerrarFormulario()">Cancelar</button>
-      </div>
-    </form>
-  </div>
-</div>
 
         
 
@@ -771,7 +737,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const traducciones = {
         es: {
-            contratar: "Contratar",
+            contratar: "Si desea contratar debe inicar sesion como usuario",
             home: "Home", premium: "Premium", categorias: "Categorías", bandeja: "Bandeja de entrada", configuracion: "Configuración", ayuda: "Ayuda",
             calificacionesTitulo: "Calificaciones",
             dejarCalificacion: "Dejá tu calificación",
