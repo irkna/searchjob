@@ -38,8 +38,8 @@ CREATE TABLE `comentario` (
   `dni_usuario` INT NOT NULL,
   `comentario` TEXT NOT NULL,
   `fecha` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`id_publicacion`) REFERENCES publicacion(`id_publicacion`) ON DELETE CASCADE,
-  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) ON DELETE CASCADE
+  FOREIGN KEY (`id_publicacion`) REFERENCES publicacion(`id_publicacion`) ,
+  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) 
 );
 
 CREATE TABLE `notificaciones` (
@@ -50,59 +50,43 @@ CREATE TABLE `notificaciones` (
   `enlace` VARCHAR(255),
   `fecha` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `leido` TINYINT(1) DEFAULT 0,
-  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) ON DELETE CASCADE
+  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) 
 );
 
 CREATE TABLE `califica` (
-  `id_calificacion` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id_calificacion` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `dni_trabajador` INT(8) NOT NULL,
   `dni_usuario` INT(8) NOT NULL,
   `puntuacion` INT(5) NOT NULL,
   `comentario` TEXT(100) NOT NULL,
-  FOREIGN KEY (`dni_trabajador`) REFERENCES trabajador(`identificador`),
-  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`)
-);
-ALTER TABLE califica
-DROP FOREIGN KEY califica_ibfk_1;
-
-ALTER TABLE califica
-ADD CONSTRAINT califica_ibfk_1
-FOREIGN KEY (dni_trabajador) REFERENCES usuarios(dni);
-
+  FOREIGN KEY (`dni_trabajador`) REFERENCES usuarios(`dni`) ,
+  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) 
+  );
 
 CREATE TABLE `contrato` (
-  `id_servicio` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id_servicio` INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `dni_trabajador` INT(8) NOT NULL,
   `dni_usuario` INT(8) NOT NULL,
   `costo` INT(100) NOT NULL,
   `fecha_y_hora` DATETIME NOT NULL,
   `descripcion` VARCHAR(100) NOT NULL,
   `ubicacion` VARCHAR(100) NOT NULL,
-  FOREIGN KEY (`dni_trabajador`) REFERENCES trabajador(`identificador`),
-  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`)
+  `estado` ENUM('pendiente','en_curso','entregado','finalizado','cancelado','pagado') DEFAULT 'en_curso',
+  `numero_operacion` VARCHAR(50) NULL,
+  FOREIGN KEY (`dni_trabajador`) REFERENCES trabajador(`identificador`) ,
+  FOREIGN KEY (`dni_usuario`) REFERENCES usuarios(`dni`) 
 );
-ALTER TABLE contrato ADD COLUMN estado ENUM('pendiente','en_curso','entregado','finalizado','cancelado') DEFAULT 'en_curso';
-ALTER TABLE contrato 
-MODIFY COLUMN estado ENUM('pendiente','en_curso','entregado','finalizado','cancelado','pagado') 
-DEFAULT 'en_curso';
-
-ALTER TABLE contrato ADD COLUMN numero_operacion VARCHAR(50) NULL AFTER estado;
-
 
 CREATE TABLE `mensajes` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `emisor_dni` int(20) NOT NULL,
-  `receptor_dni` int(20) NOT NULL,
+  `emisor_dni` INT(20) NOT NULL,
+  `receptor_dni` INT(20) NOT NULL,
   `mensaje` TEXT NOT NULL,
   `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`receptor_dni`) REFERENCES trabajador(`identificador`),
-  FOREIGN KEY (`emisor_dni`) REFERENCES usuarios(`dni`)
-);
-
-ALTER TABLE mensajes ADD COLUMN leido TINYINT(1) DEFAULT 0;
-
-
-
+  `leido` TINYINT(1) DEFAULT 0,
+  FOREIGN KEY (`emisor_dni`) REFERENCES usuarios(`dni`),
+  FOREIGN KEY (`receptor_dni`) REFERENCES trabajador(`identificador`) 
+  );
 
 
 
